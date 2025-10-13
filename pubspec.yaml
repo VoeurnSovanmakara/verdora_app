@@ -7,12 +7,41 @@ environment:
   sdk: ^3.9.0
   flutter: ^3.35.0
 
+scripts:
+  run: fvm flutter run --flavor development --target lib/main_development.dart
+  run:stage: fvm flutter run --flavor staging --target lib/main_staging.dart
+  clean: fvm flutter clean && fvm flutter pub get && cd ios && pod install && cd ..
+  start:
+    prod: fvm flutter run --flavor production --target lib/main_production.dart
+    prod:release: fvm flutter run --flavor production --target lib/main_production.dart --release
+    dev: fvm flutter run --flavor development --target lib/main_development.dart
+    dev:release: fvm flutter run --flavor development --target lib/main_development.dart --release
+  build:
+    android:
+      apk:analyze: fvm flutter build apk --flavor production -t lib/main_production.dart --analyze-size --target-platform=android-arm64
+      apk: fvm flutter build apk --flavor production -t lib/main_production.dart
+      appbundle: fvm flutter build appbundle --flavor production -t lib/main_production.dart
+      apk:dev: fvm flutter build apk --flavor development -t lib/main_development.dart
+      appbundle:dev: fvm flutter build appbundle --flavor development -t lib/main_development.dart
+    ios:
+      ipa: fvm flutter build ipa --flavor production -t lib/main_production.dart
+      ios: fvm flutter build ios --flavor production -t lib/main_production.dart
+      ipa:dev: fvm flutter build ipa --flavor development -t lib/main_development.dart
+      ios:dev: fvm flutter build ios --flavor development -t lib/main_development.dart
+  gen:
+    localize: fvm flutter gen-l10n
+    build: dart run build_runner build
+    build:delete: dart run build_runner build --delete-conflicting-outputs
+    watch: dart run build_runner watch
+
 dependencies:
   bloc: ^9.0.1
   bloc_concurrency: ^0.3.0
   cached_network_image: ^3.4.1
+  crystal_navigation_bar: ^1.0.4
   dio: ^5.9.0
   equatable: ^2.0.7
+  flash: ^3.1.1
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
@@ -22,6 +51,7 @@ dependencies:
     sdk: flutter
   flutter_native_splash: ^2.4.6
   go_router: ^16.2.4
+  iconsax_plus: ^1.0.0
   intl: ^0.20.2
   
 dev_dependencies:
@@ -34,3 +64,24 @@ dev_dependencies:
 flutter:
   generate: true
   uses-material-design: true
+
+  assets:
+  # - assets/icons/
+  - assets/images/
+  - assets/svgs/
+  - assets/logo/
+  - .env.dev
+  - .env.prod
+  - .env.stage
+
+  fonts:
+    - family: KantumruyPro
+      fonts:
+        - asset: assets/fonts/KantumruyPro-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/KantumruyPro-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/KantumruyPro-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/KantumruyPro-Bold.ttf
+          weight: 700
