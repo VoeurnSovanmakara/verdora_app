@@ -5,18 +5,27 @@ import 'package:go_router/go_router.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:verdora_app/core/extensions/src/build_context_etx.dart';
 import 'package:verdora_app/core/routes/routes.dart';
+import 'package:verdora_app/feature/auth/forgot_password/view/src/forgot_password_page.dart';
+import 'package:verdora_app/feature/auth/login/login.dart';
+import 'package:verdora_app/feature/auth/sign_up/sign_up.dart';
 import 'package:verdora_app/feature/cart/view/view.dart';
-import 'package:verdora_app/feature/favorite/view/src/favorite_page.dart';
 import 'package:verdora_app/feature/home/view/src/home_page.dart';
+import 'package:verdora_app/feature/order/order.dart';
+import 'package:verdora_app/feature/profile/change_password/view/src/change_password_page.dart';
+import 'package:verdora_app/feature/profile/edit_profile/view/src/edit_profile_page.dart';
 import 'package:verdora_app/feature/profile/view/src/profile_page.dart';
 import 'package:verdora_app/feature/splash/view/src/splash_page.dart';
+import 'package:verdora_app/feature/welcome/view/src/welcome_page.dart';
 
 enum Pages {
+  // onboarding
+  welcome,
   // splash
   splash,
   // auth
   login,
   signup,
+  forgotPassword,
   // bottom nav bar
   app,
   // home
@@ -26,8 +35,13 @@ enum Pages {
   cart,
   // favorite
   favorite,
+  // order
+  orderList,
+  orderDetails,
   // profile
   profile,
+  editProfile,
+  changePassword,
   // search
   search,
 }
@@ -41,11 +55,11 @@ class AppRouter {
   static final homeShellNavigatorKey = GlobalKey<NavigatorState>(
     debugLabel: 'home',
   );
-  static final favoriteShellNavigatorKey = GlobalKey<NavigatorState>(
-    debugLabel: 'favorite',
-  );
   static final cartShellNavigatorKey = GlobalKey<NavigatorState>(
     debugLabel: 'cart',
+  );
+  static final orderShellNavigatorKey = GlobalKey<NavigatorState>(
+    debugLabel: 'order',
   );
   static final profileShellNavigatorKey = GlobalKey<NavigatorState>(
     debugLabel: 'profile',
@@ -69,6 +83,31 @@ class AppRouter {
         name: Pages.splash.name,
         path: '/',
         pageBuilder: (context, state) => SplashPage.page(key: state.pageKey),
+      ),
+      // welcome
+      GoRoute(
+        name: Pages.welcome.name,
+        path: '/welcome',
+        pageBuilder: (context, state) => WelcomePage.page(key: state.pageKey),
+      ),
+      // signup
+      GoRoute(
+        name: Pages.signup.name,
+        path: '/signup',
+        pageBuilder: (context, state) => SignUpPage.page(key: state.pageKey),
+      ),
+      // login
+      GoRoute(
+        name: Pages.login.name,
+        path: '/login',
+        pageBuilder: (context, state) => LoginPage.page(key: state.pageKey),
+      ),
+      // forgot password
+      GoRoute(
+        name: Pages.forgotPassword.name,
+        path: '/forgot-password',
+        pageBuilder: (context, state) =>
+            ForgotPasswordPage.page(key: state.pageKey),
       ),
       // Main App Route with Bottom Navigation
       GoRoute(
@@ -106,13 +145,13 @@ class AppRouter {
                 ],
               ),
               StatefulShellBranch(
-                navigatorKey: favoriteShellNavigatorKey,
+                navigatorKey: orderShellNavigatorKey,
                 routes: [
                   GoRoute(
-                    path: 'favorite',
-                    name: Pages.favorite.name,
+                    path: 'order',
+                    name: Pages.orderList.name,
                     pageBuilder: (context, state) =>
-                        FavoritePage.page(key: state.pageKey),
+                        OrderListPage.page(key: state.pageKey),
                   ),
                 ],
               ),
@@ -125,6 +164,24 @@ class AppRouter {
                     name: Pages.profile.name,
                     pageBuilder: (context, state) =>
                         ProfilePage.page(key: state.pageKey),
+                    routes: [
+                      GoRoute(
+                        name: Pages.editProfile.name,
+                        parentNavigatorKey: rootNavigatorKey,
+                        path: 'edit-profile',
+                        pageBuilder: (context, state) {
+                          return EditProfilePage.page(key: state.pageKey);
+                        },
+                      ),
+                      GoRoute(
+                        name: Pages.changePassword.name,
+                        parentNavigatorKey: rootNavigatorKey,
+                        path: 'change-password',
+                        pageBuilder: (context, state) {
+                          return ChangePasswordPage.page(key: state.pageKey);
+                        },
+                      ),
+                    ]
                   ),
                 ],
               ),
@@ -187,8 +244,8 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
             selectedColor: context.colors.primary,
           ),
           CrystalNavigationBarItem(
-            icon: IconsaxPlusBold.heart,
-            unselectedIcon: IconsaxPlusLinear.heart,
+            icon: IconsaxPlusBold.receipt_text,
+            unselectedIcon: IconsaxPlusLinear.receipt_text,
             selectedColor: context.colors.primary,
           ),
           CrystalNavigationBarItem(

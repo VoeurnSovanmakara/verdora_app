@@ -1,0 +1,31 @@
+{
+  "@@locale": "km",
+  "empty": "ទិន្នន័យទទេ",
+  "@empty": {},
+  "search_products": "ស្វែងរកផលិតផល",
+  "@search_products": {
+    "description": "Placeholder search products homepage"
+  },
+  "need_location_access": "ត្រូវការការចូលដំណើរការទីតាំង",
+  "@need_location_access": {},
+  "need_location_access_info": "សូមអនុញ្ញាតការកំណត់ចូលប្រើទីតាំង",
+  "@need_location_access_info": {},
+  "open_setting": "បើកការកំណត់",
+  "@open_setting": {},
+  "cancel": "បោះបង់",
+  "@cancel": {
+    "description": "cancel button lable"
+  },
+  "edit_profile_picture": "កែរូបថត",
+  "@edit_profile_picture": {
+    "description": "edit profile picture lable"
+  },
+  "take_photo": "ថតរូប",
+  "@take_photo": {
+    "description": "take photo option lable"
+  },
+  "choose_from_library": "ជ្រើសរើសរូបភាព",
+  "@choose_from_library": {
+    "description": "choose from library option lable"
+  }
+}

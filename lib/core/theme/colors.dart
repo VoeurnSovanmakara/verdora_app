@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const primary = Color(0xFF0077A6); // primary light
-  static const primaryBackground =
-      Color(0xFFFFFFFF); // primary light background
-  static const secondary = Color(0xFF3FA2CC); // primary dark
-  static const secondaryBackground =
-      Color(0xFF1F1F1F); // primary dark background
-  static const tertiary = Color(0xFFDB5C3D); // primary dark & light
+  static const primary = Color(0xFF7CB342);
+  static const secondary = Color(0xFFCF3401);
+  static const tertiary = Color(0xFF254D8F);
   static const black = Color(0xFF000000);
   static const Color transparent = Colors.transparent;
   static const white = Color(0xFFFFFFFF);
   static const grey = Color(0x00f6f7fb);
-  static const primaryText = Color(0xFF1F1F1F); // primary light text
-  static const secondaryText = Color(0xFFFFFFFF); // primary dark text
+  static const secondaryTextLight = Color(0xFF8F96B1);
   //purple
   static const purpleLight = Color(0xFF8C6FF7);
   static const purplePrimary = Color(0xFF5A31F4);
@@ -23,22 +18,13 @@ class AppColors {
   static const orangePrimary = Color(0xFFFF9F21);
   //green
   static const greenLight = Color(0xFF5BD51E);
-  static const greenPrimary = Color(0xFF60BA62);
+  static const greenPrimary = Color(0xFF00C74F);
   static const greenDark = Color(0xFF4AC272);
-  //blue
-  static const darkCyanBlue = Color(0xFF2C5054);
-  static const blueLight = Color(0xFF4F6FB4);
   //grey
   static const greyLight = Color(0xFF6A7486);
   static const greyPrimary = Color(0xFFB9C2C3);
   static const greySecondary = Color(0xFFB9C2C3);
   static const greyDark = Color(0xFF163336);
-  //red
-  static const redPrimary = Color(0xFFFC3B3B);
-  //order color status
-  static const processing = Color(0xFFFFBA7A);
-  static const inDelivery = Color(0xFFE8DB67);
-  static const delivered = Color(0xFF62C684);
   //neutrals
   static const neutral0 = Color(0xFF000000);
   static const neutral4 = Color(0xFF0c0e11);
@@ -65,14 +51,37 @@ class AppColors {
   static const neutral96 = Color(0xFFf3f3f6);
   static const neutral98 = Color(0xFFf6f7fb);
   static const neutral100 = Color(0xFFffffff);
+
+  // grey shades
+  static const pureWhite = Color(0xFFFFFFFF);
+  static const lightShadeGrey10 = Color(0xFFF7F9FA);
+  static const lightShadeGrey20 = Color(0xFFF2F4F5);
+  static const lightShadeGrey30 = Color(0xFFE3E5E5);
+  static const lightShadeGrey40 = Color(0xFFCDCFD0);
+  static const lightShadeGrey50 = Color(0xFF979C9E);
+
+  static const pureDark = Color(0xFF090A0A);
+  static const darkShadeGrey100 = Color(0xFF202325);
+  static const darkShadeGrey90 = Color(0xFF303437);
+  static const darkShadeGrey80 = Color(0xFF404446);
+  static const darkShadeGrey70 = Color(0xFF6C7072);
+  static const darkShadeGrey60 = Color(0xFF72777A);
+
+  // My Own Color
+  static const vBgColor = Color(0xFFF9FDF4);
+  static const vPrimaryColor = Color(0xFF7CB342);
+  static const vAccentColor = Color(0xFFFF8A65);
+  static const vButtonColor = Color(0xFF2ec752);
+  static const vLightTextColor = Color(0xFFAED581);
+  static const vDarkTextColor = Color(0xFF33691E);
+  static const vIconColor = Color(0xFFCFD8DC);
+  static const vErrorColor = Color(0xFFE57373);
 }
 
 class AppColorScheme extends ThemeExtension<AppColorScheme> {
   AppColorScheme({
     required this.primary,
-    required this.primaryBackground,
     required this.secondary,
-    required this.secondaryBackground,
     required this.white,
     required this.dark,
     required this.transparent,
@@ -112,26 +121,38 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     required this.greenLight,
     required this.greenPrimary,
     required this.greenDark,
-    required this.darkCyanBlue,
-    required this.blueLight,
+    required this.greyDark,
     required this.greyLight,
-    required this.redPrimary,
     required this.greyPrimary,
     required this.greySecondary,
-    required this.greyDark,
-    required this.processing,
-    required this.inDelivery,
-    required this.delivered,
-
+    required this.darkShadeGrey100,
+    required this.darkShadeGrey60,
+    required this.darkShadeGrey70,
+    required this.darkShadeGrey80,
+    required this.darkShadeGrey90,
+    required this.lightShadeGrey10,
+    required this.lightShadeGrey20,
+    required this.lightShadeGrey30,
+    required this.lightShadeGrey40,
+    required this.lightShadeGrey50,
+    required this.pureDark,
+    required this.pureWhite,
+    // my own color
+    required this.vBgColor,
+    required this.vAccentColor,
+    required this.vButtonColor,
+    required this.vDarkTextColor,
+    required this.vErrorColor,
+    required this.vIconColor,
+    required this.vLightTextColor,
+    required this.vPrimaryColor,
   });
 
   /// Main primary color
   final Color primary;
-  final Color primaryBackground;
 
   /// Main secondary color
   final Color secondary;
-  final Color secondaryBackground;
 
   /// Main tertiary color
   final Color tertiary;
@@ -153,20 +174,11 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
   final Color greenLight;
   final Color greenPrimary;
   final Color greenDark;
-  //Blue
-  final Color darkCyanBlue;
-  final Color blueLight;
   //grey
   final Color greyLight;
   final Color greyPrimary;
   final Color greySecondary;
   final Color greyDark;
-  //red
-  final Color redPrimary;
-  // order status
-  final Color processing;
-  final Color inDelivery;
-  final Color delivered;
 
   // neutral
   final Color neutral0;
@@ -195,6 +207,31 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
   final Color neutral98;
   final Color neutral100;
 
+  // Shades
+  final Color pureWhite;
+  final Color lightShadeGrey10;
+  final Color lightShadeGrey20;
+  final Color lightShadeGrey30;
+  final Color lightShadeGrey40;
+  final Color lightShadeGrey50;
+
+  final Color pureDark;
+  final Color darkShadeGrey100;
+  final Color darkShadeGrey90;
+  final Color darkShadeGrey80;
+  final Color darkShadeGrey70;
+  final Color darkShadeGrey60;
+
+  // My own Color
+  final Color vBgColor;
+  final Color vPrimaryColor;
+  final Color vAccentColor;
+  final Color vButtonColor;
+  final Color vLightTextColor;
+  final Color vDarkTextColor;
+  final Color vIconColor;
+  final Color vErrorColor;
+
   @override
   ThemeExtension<AppColorScheme> lerp(
     covariant ThemeExtension<AppColorScheme>? other,
@@ -205,10 +242,8 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     }
     return AppColorScheme(
       primary: primary,
-      primaryBackground: primaryBackground,
       primaryText: primaryText,
       secondary: secondary,
-      secondaryBackground: secondaryBackground,
       secondaryText: secondaryText,
       transparent: transparent,
       white: white,
@@ -247,25 +282,38 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
       greenLight: greenLight,
       greenPrimary: greenPrimary,
       greenDark: greenDark,
-      darkCyanBlue: darkCyanBlue,
-      blueLight: blueLight,
+      greyDark: greyDark,
       greyLight: greyLight,
-      redPrimary: redPrimary,
       greyPrimary: greyPrimary,
       greySecondary: greySecondary,
-      greyDark: greyDark,
-      processing: processing,
-      inDelivery: inDelivery,
-      delivered: delivered,
+      darkShadeGrey100: darkShadeGrey100,
+      darkShadeGrey60: darkShadeGrey60,
+      darkShadeGrey70: darkShadeGrey70,
+      darkShadeGrey80: darkShadeGrey80,
+      darkShadeGrey90: darkShadeGrey90,
+      pureDark: pureDark,
+      pureWhite: pureWhite,
+      lightShadeGrey10: lightShadeGrey10,
+      lightShadeGrey20: lightShadeGrey20,
+      lightShadeGrey30: lightShadeGrey30,
+      lightShadeGrey40: lightShadeGrey40,
+      lightShadeGrey50: lightShadeGrey50,
+      // my own color
+      vBgColor: vBgColor,
+      vAccentColor: vAccentColor,
+      vButtonColor: vButtonColor,
+      vDarkTextColor: vDarkTextColor,
+      vErrorColor: vErrorColor,
+      vIconColor: vIconColor,
+      vLightTextColor: vLightTextColor,
+      vPrimaryColor: vPrimaryColor,
     );
   }
 
   @override
   AppColorScheme copyWith({
     Color? primary,
-    Color? primaryBackground,
     Color? secondary,
-    Color? secondaryBackground,
     Color? tertiary,
     Color? white,
     Color? dark,
@@ -304,23 +352,36 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     Color? greenLight,
     Color? greenPrimary,
     Color? greenDark,
-    Color? transparent,
-    Color? darkCyanBlue,
-    Color? blueLight,
+    Color? greyDark,
     Color? greyLight,
-    Color? redPrimary,
     Color? greyPrimary,
     Color? greySecondary,
-    Color? greyDark,
-    Color? processing,
-    Color? inDelivery,
-    Color? delivered,
+    Color? transparent,
+    Color? darkShadeGrey100,
+    Color? darkShadeGrey60,
+    Color? darkShadeGrey70,
+    Color? darkShadeGrey80,
+    Color? darkShadeGrey90,
+    Color? lightShadeGrey10,
+    Color? lightShadeGrey20,
+    Color? lightShadeGrey30,
+    Color? lightShadeGrey40,
+    Color? lightShadeGrey50,
+    Color? pureDark,
+    Color? pureWhite,
+    // my own color
+    Color? vBgColor,
+    Color? vPrimaryColor,
+    Color? vAccentColor,
+    Color? vButtonColor,
+    Color? vLightTextColor,
+    Color? vDarkTextColor,
+    Color? vIconColor,
+    Color? vErrorColor,
   }) {
     return AppColorScheme(
       primary: primary ?? this.primary,
-      primaryBackground: primaryBackground ?? this.primaryBackground,
       secondary: secondary ?? this.secondary,
-      secondaryBackground: secondaryBackground ?? this.secondaryBackground,
       white: white ?? this.white,
       dark: dark ?? this.dark,
       primaryText: primaryText ?? this.primaryText,
@@ -359,17 +420,32 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
       greenLight: greenLight ?? this.greenLight,
       greenPrimary: greenPrimary ?? this.greenPrimary,
       greenDark: greenDark ?? this.greenDark,
-      transparent: transparent ?? this.transparent,
-      darkCyanBlue: darkCyanBlue ?? this.darkCyanBlue,
-      blueLight: blueLight ?? this.blueLight,
+      greyDark: greyDark ?? this.greyDark,
       greyLight: greyLight ?? this.greyLight,
-      redPrimary: redPrimary ?? this.redPrimary,
       greyPrimary: greyPrimary ?? this.greyPrimary,
       greySecondary: greySecondary ?? this.greySecondary,
-      greyDark: greyDark ?? this.greyDark,
-      processing: processing ?? this.processing,
-      inDelivery: inDelivery ?? this.inDelivery,
-      delivered: delivered ?? this.delivered,
+      transparent: transparent ?? this.transparent,
+      darkShadeGrey100: darkShadeGrey100 ?? this.darkShadeGrey100,
+      darkShadeGrey60: darkShadeGrey60 ?? this.darkShadeGrey60,
+      darkShadeGrey70: darkShadeGrey70 ?? this.darkShadeGrey70,
+      darkShadeGrey80: darkShadeGrey80 ?? this.darkShadeGrey80,
+      darkShadeGrey90: darkShadeGrey90 ?? this.darkShadeGrey90,
+      lightShadeGrey10: lightShadeGrey10 ?? this.lightShadeGrey10,
+      lightShadeGrey20: lightShadeGrey20 ?? this.lightShadeGrey20,
+      lightShadeGrey30: lightShadeGrey30 ?? this.lightShadeGrey30,
+      lightShadeGrey40: lightShadeGrey40 ?? this.lightShadeGrey40,
+      lightShadeGrey50: lightShadeGrey50 ?? this.lightShadeGrey50,
+      pureDark: pureDark ?? this.pureDark,
+      pureWhite: pureWhite ?? this.pureWhite,
+      // my own color
+      vBgColor: vBgColor ?? this.vBgColor,
+      vAccentColor: vAccentColor ?? this.vAccentColor,
+      vButtonColor: vButtonColor ?? this.vButtonColor,
+      vDarkTextColor: vDarkTextColor ?? this.vDarkTextColor,
+      vErrorColor: vErrorColor ?? this.vErrorColor,
+      vIconColor: vIconColor ?? this.vIconColor,
+      vLightTextColor: vLightTextColor ?? this.vLightTextColor,
+      vPrimaryColor: vPrimaryColor ?? this.vPrimaryColor,
     );
   }
 }

@@ -1,7 +1,31 @@
 {
-    "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
+  "@@locale": "en",
+  "empty": "Data is empty",
+  "@empty": {},
+  "search_products": "Search Products",
+  "@search_products": {
+    "description": "Placeholder search products homepage"
+  },
+  "need_location_access": "Need Location Access",
+  "@need_location_access": {},
+  "need_location_access_info": "Need location to calculate delivery fee in your area",
+  "@need_location_access_info": {},
+  "open_setting": "Open Setting",
+  "@open_setting": {},
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "cancel button lable"
+  },
+  "edit_profile_picture": "Edit Profile Picture",
+  "@edit_profile_picture": {
+    "description": "edit profile picture lable"
+  },
+  "take_photo": "Take a Photo",
+  "@take_photo": {
+    "description": "take photo option lable"
+  },
+  "choose_from_library": "Choose from Library",
+  "@choose_from_library": {
+    "description": "choose from library option lable"
+  }
 }
