@@ -27,5 +27,17 @@
   "choose_from_library": "ជ្រើសរើសរូបភាព",
   "@choose_from_library": {
     "description": "choose from library option lable"
+  },
+  "dark_mode": "ងងឹត",
+  "@dark_mode": {
+    "description": "dark mode lable"
+  },
+  "light_mode": "ភ្លឺ",
+  "@light_mode": {
+    "description": "light mode label"
+  },
+  "select_language": "ជ្រើសរើសភាសា",
+  "@select_language": {
+    "description": "select language lable"
   }
 }

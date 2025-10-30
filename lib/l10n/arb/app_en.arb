@@ -27,5 +27,17 @@
   "choose_from_library": "Choose from Library",
   "@choose_from_library": {
     "description": "choose from library option lable"
+  },
+  "dark_mode": "Dark Mode",
+  "@dark_mode": {
+    "description": "dark mode label"
+  },
+  "light_mode": "Light Mode",
+  "@light_mode": {
+    "description": "light mode label"
+  },
+  "select_language": "Select Language",
+  "@select_language": {
+    "description": "select language lable"
   }
 }

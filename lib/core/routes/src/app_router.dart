@@ -152,6 +152,16 @@ class AppRouter {
                     name: Pages.orderList.name,
                     pageBuilder: (context, state) =>
                         OrderListPage.page(key: state.pageKey),
+                    routes: [
+                      GoRoute(
+                        parentNavigatorKey: rootNavigatorKey,
+                        name: Pages.orderDetails.name,
+                        path: 'order-detail',
+                        pageBuilder: (context, state) {
+                          return OrderDetailPage.page();
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -181,7 +191,7 @@ class AppRouter {
                           return ChangePasswordPage.page(key: state.pageKey);
                         },
                       ),
-                    ]
+                    ],
                   ),
                 ],
               ),

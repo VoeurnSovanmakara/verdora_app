@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:verdora_app/core/routes/src/app_router.dart';
 import 'package:verdora_app/core/theme/spacing.dart';
 import 'package:verdora_app/feature/order/order_list/widgets/src/order_item.dart';
 import 'package:verdora_app/shared/widgets/src/app_bars/src/title_app_bar.dart';
@@ -42,7 +44,9 @@ class _OrderListViewState extends State<OrderListView> {
         ),
         separatorBuilder: (context, index) => const SizedBox(height: Spacing.s),
         itemBuilder: (context, index) {
-          return const OrderItem();
+          return OrderItem(
+            onPressed: () => context.pushNamed(Pages.orderDetails.name),
+          );
         },
       ),
     );

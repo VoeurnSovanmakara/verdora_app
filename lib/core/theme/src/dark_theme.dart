@@ -4,11 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:verdora_app/core/theme/colors.dart';
 import 'package:verdora_app/core/theme/fonts.dart';
 
-const ColorScheme colorSchemeLight = ColorScheme(
-  surface: AppColors.white,
-  onSurface: AppColors.black,
+const ColorScheme colorSchemeDart = ColorScheme(
+  surface: AppColors.black,
+  onSurface: AppColors.white,
   //
-  primary: AppColors.vPrimaryColor,
+  primary: AppColors.vDarkPrimaryColor,
   // primaryContainer: Color(0xFFEE3075),
   onPrimary: AppColors.white,
   secondary: AppColors.secondary,
@@ -17,43 +17,43 @@ const ColorScheme colorSchemeLight = ColorScheme(
   //
   error: Color(0xFFF0271B),
   onError: Color(0xFFFFFFFF),
-  brightness: Brightness.light,
+  brightness: Brightness.dark,
   //neutrals
 );
 
-final colorSchemeLightExt = AppColorScheme(
-  dark: AppColors.black,
-  white: AppColors.white,
+final colorSchemeDartExt = AppColorScheme(
+  dark: AppColors.white,
+  white: AppColors.black,
   primary: AppColors.primary,
-  secondary: AppColors.primary,
+  secondary: AppColors.secondary,
   tertiary: AppColors.tertiary,
-  primaryText: AppColors.black,
+  primaryText: AppColors.greySecondary,
   secondaryText: AppColors.secondaryTextLight,
-  neutral0: AppColors.neutral0,
-  neutral4: AppColors.neutral4,
-  neutral6: AppColors.neutral6,
-  neutral10: AppColors.neutral10,
-  neutral12: AppColors.neutral12,
-  neutral17: AppColors.neutral17,
-  neutral20: AppColors.neutral20,
-  neutral22: AppColors.neutral22,
-  neutral24: AppColors.neutral24,
-  neutral30: AppColors.neutral30,
-  neutral40: AppColors.neutral40,
-  neutral50: AppColors.neutral50,
-  neutral60: AppColors.neutral60,
-  neutral70: AppColors.neutral70,
-  neutral72: AppColors.neutral72,
-  neutral80: AppColors.neutral80,
-  neutral87: AppColors.neutral87,
-  neutral89: AppColors.neutral89,
-  neutral90: AppColors.neutral90,
-  neutral92: AppColors.neutral92,
-  neutral94: AppColors.neutral94,
-  neutral95: AppColors.neutral95,
-  neutral96: AppColors.neutral96,
-  neutral98: AppColors.neutral98,
-  neutral100: AppColors.neutral100,
+  neutral0: AppColors.neutral100,
+  neutral4: AppColors.neutral98,
+  neutral6: AppColors.neutral96,
+  neutral10: AppColors.neutral94,
+  neutral12: AppColors.neutral92,
+  neutral17: AppColors.neutral90,
+  neutral20: AppColors.neutral89,
+  neutral22: AppColors.neutral87,
+  neutral24: AppColors.neutral80,
+  neutral30: AppColors.neutral72,
+  neutral40: AppColors.neutral70,
+  neutral50: AppColors.neutral60,
+  neutral60: AppColors.neutral50,
+  neutral70: AppColors.neutral40,
+  neutral72: AppColors.neutral30,
+  neutral80: AppColors.neutral24,
+  neutral87: AppColors.neutral22,
+  neutral89: AppColors.neutral20,
+  neutral90: AppColors.neutral17,
+  neutral92: AppColors.neutral12,
+  neutral94: AppColors.neutral10,
+  neutral95: AppColors.neutral6,
+  neutral96: AppColors.neutral4,
+  neutral98: AppColors.neutral0,
+  neutral100: AppColors.neutral0,
   purpleLight: AppColors.purpleLight,
   purplePrimary: AppColors.purplePrimary,
   purpleDark: AppColors.purpleDark,
@@ -66,19 +66,19 @@ final colorSchemeLightExt = AppColorScheme(
   greyPrimary: AppColors.greyPrimary,
   greySecondary: AppColors.greySecondary,
   greyDark: AppColors.greyDark,
-  transparent: const Color.fromARGB(0, 255, 255, 255),
-  darkShadeGrey100: AppColors.darkShadeGrey100,
-  darkShadeGrey60: AppColors.darkShadeGrey60,
-  darkShadeGrey70: AppColors.darkShadeGrey70,
-  darkShadeGrey80: AppColors.darkShadeGrey80,
-  darkShadeGrey90: AppColors.darkShadeGrey90,
-  lightShadeGrey10: AppColors.lightShadeGrey10,
-  lightShadeGrey20: AppColors.lightShadeGrey20,
-  lightShadeGrey30: AppColors.lightShadeGrey30,
-  lightShadeGrey40: AppColors.lightShadeGrey40,
+  transparent: AppColors.transparent,
+  darkShadeGrey100: AppColors.lightShadeGrey10,
+  darkShadeGrey60: AppColors.lightShadeGrey40,
+  darkShadeGrey70: AppColors.lightShadeGrey30,
+  darkShadeGrey80: AppColors.lightShadeGrey20,
+  darkShadeGrey90: AppColors.lightShadeGrey10,
+  lightShadeGrey10: AppColors.darkShadeGrey90,
+  lightShadeGrey20: AppColors.darkShadeGrey80,
+  lightShadeGrey30: AppColors.darkShadeGrey70,
+  lightShadeGrey40: AppColors.darkShadeGrey60,
   lightShadeGrey50: AppColors.lightShadeGrey50,
-  pureDark: AppColors.pureDark,
-  pureWhite: AppColors.pureWhite,
+  pureDark: AppColors.pureWhite,
+  pureWhite: AppColors.neutral4,
   // my own color
   vBgColor: AppColors.vBgColor,
   vPrimaryColor: AppColors.vPrimaryColor,
@@ -96,36 +96,36 @@ final colorSchemeLightExt = AppColorScheme(
   vDarkIconColor: AppColors.vDarkIconColor,
   vDarkPrimaryColor: AppColors.vDarkPrimaryColor,
 
-  vContainerColor: AppColors.vContainerColor,
-  vDarkContainerColor: AppColors.vDarkContainerColor
+  vContainerColor: AppColors.vDarkContainerColor,
+  vDarkContainerColor: AppColors.vContainerColor,
 );
 
-final lightTheme = ThemeData(
+final darkTheme = ThemeData(
   extensions: [
-    colorSchemeLightExt,
+    colorSchemeDartExt,
     const FlashToastTheme(),
     const FlashBarTheme(),
   ],
   useMaterial3: false,
   chipTheme: ChipThemeData(
     secondaryLabelStyle: const TextStyle(
-      color: Colors.white,
+      color: Colors.black,
       fontFamily: Fonts.en,
       fontSize: 12,
     ),
-    deleteIconColor: Colors.white,
-    backgroundColor: colorSchemeLightExt.primary,
-    checkmarkColor: Colors.white,
+    deleteIconColor: Colors.black,
+    backgroundColor: colorSchemeDartExt.primary,
+    checkmarkColor: Colors.black,
     labelStyle: const TextStyle(
-      color: Colors.white,
+      color: Colors.black,
       fontFamily: Fonts.en,
       fontSize: 12,
     ),
   ),
-  scaffoldBackgroundColor: AppColors.vBgColor,
+  scaffoldBackgroundColor: AppColors.vDarkBgColor,
   // dividerTheme:
   //     const DividerThemeData(thickness: 0.5, color: AppColors.divider),
-  textTheme: Typography.material2021().black
+  textTheme: Typography.material2021().white
       .copyWith(
         displayLarge: const TextStyle(
           fontSize: 28,
@@ -204,12 +204,12 @@ final lightTheme = ThemeData(
         ),
       )
       .apply(
-        bodyColor: colorSchemeLightExt.primaryText,
-        displayColor: colorSchemeLightExt.primaryText,
+        bodyColor: colorSchemeDartExt.primaryText,
+        displayColor: colorSchemeDartExt.primaryText,
         fontFamilyFallback: [Fonts.kh],
       ),
-  colorScheme: colorSchemeLight,
-  primaryColor: colorSchemeLightExt.primary,
+  colorScheme: colorSchemeDart,
+  primaryColor: colorSchemeDartExt.primary,
   // primaryColorDark: colorSchemeLightExt.primary900,
   // primaryColorLight: colorSchemeLightExt.primary400,
   datePickerTheme: const DatePickerThemeData(),
@@ -218,16 +218,16 @@ final lightTheme = ThemeData(
   expansionTileTheme: ExpansionTileThemeData(
     backgroundColor: Colors.transparent,
     childrenPadding: const EdgeInsets.all(16),
-    iconColor: colorSchemeLightExt.primary,
-    textColor: colorSchemeLightExt.primaryText,
-    collapsedTextColor: colorSchemeLightExt.primaryText,
-    collapsedIconColor: colorSchemeLightExt.primary,
+    iconColor: colorSchemeDartExt.primary,
+    textColor: colorSchemeDartExt.primaryText,
+    collapsedTextColor: colorSchemeDartExt.primaryText,
+    collapsedIconColor: colorSchemeDartExt.primary,
   ),
   inputDecorationTheme: InputDecorationTheme(
     hintStyle: const TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.w500,
-      // color: colorSchemeLightExt.lightShadeGray50,
+      // color: colorSchemeDartExt.lightShadeGray50,
       fontFamilyFallback: [Fonts.en, Fonts.kh],
     ),
     contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
@@ -237,7 +237,7 @@ final lightTheme = ThemeData(
       borderRadius: BorderRadius.circular(12),
       borderSide: BorderSide(
         width: 2,
-        color: colorSchemeLightExt.primary,
+        color: colorSchemeDartExt.primary,
       ),
     ),
     errorBorder: OutlineInputBorder(
@@ -250,7 +250,7 @@ final lightTheme = ThemeData(
     enabledBorder: OutlineInputBorder(
       borderSide: const BorderSide(
         width: 0.5,
-        // color: colorSchemeLightExt.darkShadeGray60,
+        // color: colorSchemeDartExt.darkShadeGray60,
       ),
       borderRadius: BorderRadius.circular(12),
     ),
@@ -265,10 +265,10 @@ final lightTheme = ThemeData(
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     enableFeedback: false,
     elevation: 1,
-    backgroundColor: ThemeData.light().bottomNavigationBarTheme.backgroundColor,
+    backgroundColor: ThemeData.dark().bottomNavigationBarTheme.backgroundColor,
     type: BottomNavigationBarType.fixed,
     selectedItemColor: AppColors.primary,
-    // unselectedItemColor: colorSchemeLightExt.lightShadeGray50,
+    // unselectedItemColor: colorSchemeDartExt.lightShadeGray50,
     selectedIconTheme: const IconThemeData(size: 24),
     unselectedIconTheme: const IconThemeData(size: 24),
     selectedLabelStyle: const TextStyle(
@@ -307,8 +307,8 @@ final lightTheme = ThemeData(
     style: IconButton.styleFrom(
       padding: const EdgeInsets.all(10),
       iconSize: 20,
-      backgroundColor: colorSchemeLight.surface,
-      foregroundColor: colorSchemeLight.onSurface,
+      backgroundColor: colorSchemeDart.surface,
+      foregroundColor: colorSchemeDart.onSurface,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30),
       ),
@@ -316,23 +316,23 @@ final lightTheme = ThemeData(
   ),
   appBarTheme: AppBarTheme(
     systemOverlayStyle: const SystemUiOverlayStyle(
-      statusBarBrightness: Brightness.light,
+      statusBarBrightness: Brightness.dark,
     ),
     titleTextStyle: TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.w600,
       fontFamilyFallback: const [Fonts.kh],
-      color: colorSchemeLight.onSurface,
+      color: colorSchemeDart.onSurface,
       fontFamily: Fonts.en,
     ),
     iconTheme: IconThemeData(
-      color: colorSchemeLight.onSurface,
+      color: colorSchemeDart.onSurface,
     ),
     elevation: 0,
-    backgroundColor: AppColors.vBgColor,
+    backgroundColor: AppColors.vDarkBgColor,
     actionsIconTheme: IconThemeData(
       size: 24,
-      color: colorSchemeLight.onSurface,
+      color: colorSchemeDart.onSurface,
     ),
     centerTitle: true,
   ),

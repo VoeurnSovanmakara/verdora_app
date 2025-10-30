@@ -1,18 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:verdora_app/core/app_bloc/lang/language_bloc.dart';
 import 'package:verdora_app/core/common/src/constants.dart';
+import 'package:verdora_app/core/enum/src/theme_status.dart';
 import 'package:verdora_app/core/extensions/src/build_context_etx.dart';
 import 'package:verdora_app/core/routes/src/app_router.dart';
+import 'package:verdora_app/core/theme/bloc/theme_bloc.dart';
+import 'package:verdora_app/core/theme/colors.dart';
 import 'package:verdora_app/core/theme/spacing.dart';
+import 'package:verdora_app/l10n/l10n.dart';
 import 'package:verdora_app/shared/widgets/src/app_bars/app_bar.dart';
 import 'package:verdora_app/shared/widgets/src/buttons/src/custom_button.dart';
 import 'package:verdora_app/shared/widgets/src/modals/custom_modals.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
-  
+
   static MaterialPage<void> page({Key? key}) => MaterialPage<void>(
     child: ProfilePage(key: key),
   );
@@ -31,10 +37,17 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
+  void _changeLanguage(Locale locale) {
+    context.read<LanguageBloc>().add(LanguageAppChange(locale: locale));
+    context.pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     final colors = context.colors;
     final textTheme = context.textTheme;
+    final l10n = context.l10n;
+    final isDark = context.colorScheme.brightness == Brightness.dark;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: const MainAppBar(
@@ -83,7 +96,7 @@ class _ProfileViewState extends State<ProfileView> {
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: colors.white,
+                        color: colors.vContainerColor,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: kCardShadow,
                       ),
@@ -155,7 +168,7 @@ class _ProfileViewState extends State<ProfileView> {
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: colors.white,
+                        color: colors.vContainerColor,
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: kCardShadow,
                       ),
@@ -189,7 +202,81 @@ class _ProfileViewState extends State<ProfileView> {
                               IconsaxPlusLinear.global,
                               color: colors.neutral0,
                             ),
-                            onTap: () {},
+                            onTap: () {
+                              final languageState = context
+                                  .read<LanguageBloc>()
+                                  .state;
+                              final l10n = context.l10n;
+                              CustomModal.showRoundedModal(
+                                AppRouter.rootNavigatorKey.currentContext!,
+                                (modalContext) => BlocProvider.value(
+                                  value: context.read<LanguageBloc>(),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              l10n.select_language,
+                                              style: textTheme.titleLarge,
+                                            ),
+                                            IconButton(
+                                              onPressed: () {
+                                                modalContext.pop();
+                                              },
+                                              icon: const Icon(Icons.close),
+                                            ),
+                                          ],
+                                        ),
+                                        ListTile(
+                                          leading: Text(
+                                            '🇰🇭',
+                                            style: textTheme.displayLarge,
+                                          ),
+                                          onTap: () {
+                                            _changeLanguage(const Locale('km'));
+                                          },
+                                          title: const Text('ភាសាខ្មែរ'),
+                                          trailing:
+                                              languageState.selectLanguage ==
+                                                  const Locale('km')
+                                              ? Icon(
+                                                  Icons.check_circle,
+                                                  color: colors.primary,
+                                                )
+                                              : null,
+                                        ),
+                                        ListTile(
+                                          leading: Text(
+                                            '🇺🇸',
+                                            style: textTheme.displayLarge,
+                                          ),
+                                          onTap: () {
+                                            _changeLanguage(const Locale('en'));
+                                          },
+                                          title: const Text('English'),
+                                          trailing:
+                                              languageState.selectLanguage ==
+                                                  const Locale('en')
+                                              ? Icon(
+                                                  Icons.check_circle,
+                                                  color: colors.primary,
+                                                )
+                                              : null,
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
                             title: Text(
                               'Language',
                               style: textTheme.bodyLarge?.copyWith(
@@ -207,22 +294,36 @@ class _ProfileViewState extends State<ProfileView> {
                             endIndent: 12,
                             indent: 12,
                           ),
-                          ListTile(
-                            leading: Icon(
-                              IconsaxPlusLinear.moon,
-                              color: colors.neutral0,
-                            ),
-                            onTap: () {},
-                            title: Text(
-                              'Dark Mode',
-                              style: textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            trailing: CupertinoSwitch(
-                              value: false,
-                              onChanged: (value) {},
-                            ),
+                          BlocBuilder<ThemeBloc, ThemeState>(
+                            builder: (context, state) {
+                              return ListTile(
+                                leading: Icon(
+                                  isDark
+                                      ? IconsaxPlusLinear.moon
+                                      : IconsaxPlusLinear.sun_1,
+                                  color: colors.neutral0,
+                                ),
+                                title: Text(
+                                  isDark ? l10n.dark_mode : l10n.light_mode,
+                                  style: textTheme.bodyLarge?.copyWith(
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                trailing: CupertinoSwitch(
+                                  value: isDark,
+                                  activeTrackColor: colors.primary,
+                                  thumbColor: AppColors.white,
+                                  onChanged: (value) {
+                                    final newTheme = value
+                                        ? ThemeColor.darkMode
+                                        : ThemeColor.lightMode;
+                                    context.read<ThemeBloc>().add(
+                                      ThemeAppChange(theme: newTheme),
+                                    );
+                                  },
+                                ),
+                              );
+                            },
                           ),
                           Divider(
                             height: 0,

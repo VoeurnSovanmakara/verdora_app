@@ -5,21 +5,22 @@ import 'package:verdora_app/core/theme/spacing.dart';
 import 'package:verdora_app/shared/widgets/custom_image.dart';
 
 class OrderItem extends StatelessWidget {
-  const OrderItem({super.key});
+  const OrderItem({super.key, this.onPressed});
 
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
-        final colors = context.colors;
+    final colors = context.colors;
     final textTheme = context.textTheme;
     return CupertinoButton(
       padding: EdgeInsets.zero,
-      onPressed: () {},
+      onPressed: onPressed,
       child: Container(
         padding: const EdgeInsets.all(Spacing.l),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          color: colors.white,
+          color: colors.vContainerColor,
           boxShadow: kCardShadow,
         ),
         child: Column(
@@ -58,7 +59,7 @@ class OrderItem extends StatelessWidget {
                     vertical: 2,
                   ),
                   decoration: BoxDecoration(
-                    color: colors.vPrimaryColor.withValues(alpha: 0.5),
+                    color: colors.vPrimaryColor.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
@@ -66,7 +67,7 @@ class OrderItem extends StatelessWidget {
                     style: textTheme.labelSmall?.copyWith(
                       fontSize: 10,
                       fontWeight: FontWeight.w400,
-                      color: colors.vDarkTextColor,
+                      color: colors.dark,
                     ),
                   ),
                 ),
@@ -74,7 +75,7 @@ class OrderItem extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(
-                vertical: Spacing.m, 
+                vertical: Spacing.m,
                 horizontal: Spacing.xs,
               ),
               child: Row(
@@ -86,7 +87,8 @@ class OrderItem extends StatelessWidget {
                         height: 70,
                         margin: const EdgeInsets.only(right: 10),
                         child: CustomImage(
-                          url: 'https://asset.bloomnation.com/c_fill,d_vendor:global:catalog:product:image.png,f_auto,fl_preserve_transparency,h_2000,q_auto,w_2000/v1747069803/vendor/3823/catalog/product/2/0/20240319073218_file_65f9e842a823b_65f9e8bfb5ef9.jpeg',
+                          url:
+                              'https://asset.bloomnation.com/c_fill,d_vendor:global:catalog:product:image.png,f_auto,fl_preserve_transparency,h_2000,q_auto,w_2000/v1747069803/vendor/3823/catalog/product/2/0/20240319073218_file_65f9e842a823b_65f9e8bfb5ef9.jpeg',
                           borderRadius: kBorderRadius,
                           enableCache: true,
                         ),
@@ -96,11 +98,11 @@ class OrderItem extends StatelessWidget {
                         right: 15,
                         child: Container(
                           padding: const EdgeInsets.symmetric(
-                            vertical: 2,
+                            vertical: 4,
                             horizontal: 6,
                           ),
                           decoration: BoxDecoration(
-                            color: colors.neutral90,
+                            color: colors.lightShadeGrey30,
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: Text(
@@ -111,7 +113,7 @@ class OrderItem extends StatelessWidget {
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

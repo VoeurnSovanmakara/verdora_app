@@ -193,7 +193,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 color: Colors.transparent,
               ),
             ),
-            fillColor: widget.fillColors ?? const Color(0xFFf1f4f0),
+            fillColor: widget.fillColors ?? context.colors.lightShadeGrey20,
             filled: widget.filled,
             hintText: widget.hintText,
             hintStyle: TextStyle(color: context.colors.darkShadeGrey60),

@@ -76,6 +76,16 @@ class AppColors {
   static const vDarkTextColor = Color(0xFF33691E);
   static const vIconColor = Color(0xFFCFD8DC);
   static const vErrorColor = Color(0xFFE57373);
+
+  static const vDarkBgColor = Color(0xFF1D231E);
+  static const vDarkPrimaryColor = Color(0xFFA2CF6E);
+  static const vDarkAccentColor = Color(0xFFFFB79D);
+  static const vDarkButtonColor = Color(0xFF9CCC65);
+  static const vDarkIconColor = Color(0xFF4A534D);
+  static const vDarkErrorColor = Color(0xFFE08787);
+
+  static const vContainerColor = Color(0xFFFFFFFF);
+  static const vDarkContainerColor = Color(0xFF2F3A2F);
 }
 
 class AppColorScheme extends ThemeExtension<AppColorScheme> {
@@ -146,6 +156,16 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     required this.vIconColor,
     required this.vLightTextColor,
     required this.vPrimaryColor,
+
+    required this.vDarkBgColor,
+    required this.vDarkPrimaryColor,
+    required this.vDarkAccentColor,
+    required this.vDarkButtonColor,
+    required this.vDarkIconColor,
+    required this.vDarkErrorColor,
+
+    required this.vDarkContainerColor,
+    required this.vContainerColor,
   });
 
   /// Main primary color
@@ -232,6 +252,16 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
   final Color vIconColor;
   final Color vErrorColor;
 
+  final Color vDarkBgColor;
+  final Color vDarkPrimaryColor;
+  final Color vDarkAccentColor;
+  final Color vDarkButtonColor;
+  final Color vDarkIconColor;
+  final Color vDarkErrorColor;
+
+  final Color vContainerColor;
+  final Color vDarkContainerColor;
+
   @override
   ThemeExtension<AppColorScheme> lerp(
     covariant ThemeExtension<AppColorScheme>? other,
@@ -307,6 +337,16 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
       vIconColor: vIconColor,
       vLightTextColor: vLightTextColor,
       vPrimaryColor: vPrimaryColor,
+
+      vDarkBgColor: vDarkBgColor,
+      vDarkPrimaryColor: vDarkPrimaryColor,
+      vDarkAccentColor: vDarkAccentColor,
+      vDarkButtonColor: vDarkButtonColor,
+      vDarkErrorColor: vDarkErrorColor,
+      vDarkIconColor: vDarkIconColor,
+
+      vDarkContainerColor: vDarkContainerColor,
+      vContainerColor: vContainerColor,
     );
   }
 
@@ -378,6 +418,16 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     Color? vDarkTextColor,
     Color? vIconColor,
     Color? vErrorColor,
+
+    Color? vDarkBgColor,
+    Color? vDarkPrimaryColor,
+    Color? vDarkAccentColor,
+    Color? vDarkButtonColor,
+    Color? vDarkIconColor,
+    Color? vDarkErrorColor,
+
+    Color? vContainerColor,
+    Color? vDarkContainerColor,
   }) {
     return AppColorScheme(
       primary: primary ?? this.primary,
@@ -446,6 +496,16 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
       vIconColor: vIconColor ?? this.vIconColor,
       vLightTextColor: vLightTextColor ?? this.vLightTextColor,
       vPrimaryColor: vPrimaryColor ?? this.vPrimaryColor,
+
+      vDarkBgColor: vDarkBgColor ?? this.vDarkBgColor,
+      vDarkAccentColor: vDarkAccentColor ?? this.vDarkAccentColor,
+      vDarkButtonColor: vDarkButtonColor ?? this.vDarkButtonColor,
+      vDarkErrorColor: vDarkErrorColor ?? this.vDarkErrorColor,
+      vDarkIconColor: vDarkIconColor ?? this.vDarkIconColor,
+      vDarkPrimaryColor: vDarkPrimaryColor ?? this.vDarkPrimaryColor,
+
+      vContainerColor: vContainerColor ?? this.vContainerColor,
+      vDarkContainerColor: vDarkContainerColor ?? this.vDarkContainerColor,
     );
   }
 }

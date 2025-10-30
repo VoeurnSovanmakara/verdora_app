@@ -31,12 +31,18 @@ class _HomeViewState extends State<HomeView> {
       appBar: AppBar(
         centerTitle: false,
         title: const Text('Verdora'),
-        titleTextStyle: textTheme.displayMedium,
+        titleTextStyle: textTheme.displayMedium?.copyWith(
+          fontWeight: FontWeight.bold,
+          color: colors.dark,
+        ),
         actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(IconsaxPlusLinear.search_normal_1),
+            icon: Icon(
+              IconsaxPlusLinear.search_normal_1,
+              color: colors.dark,
+            ),
           ),
         ],
       ),
