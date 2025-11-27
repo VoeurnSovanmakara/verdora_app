@@ -494,10 +494,11 @@ class _ProfileViewState extends State<ProfileView> {
                               ),
                               const SizedBox(height: 10),
                               CustomOutlineButton(
-                                textStyle: textTheme.titleLarge?.copyWith(
-                                  color: colors.vButtonColor,
-                                ),
-                                title: 'Cancel',
+                              textStyle: textTheme.titleLarge?.copyWith(
+                                color: colors.vErrorColor,
+                              ),
+                              color: colors.vErrorColor,
+                              title: l10n.cancel,
                                 onPressed: () => modalContext.pop(),
                               ),
                               const SizedBox(
