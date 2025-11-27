@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:verdora_app/l10n/l10n.dart';
 import 'package:verdora_app/shared/widgets/src/app_bars/app_bar.dart';
 
 class HelpSupportPage extends StatelessWidget {
@@ -10,8 +11,12 @@ class HelpSupportPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Scaffold(
-      appBar: const PageAppBar(title: 'Help & Support'),
+      appBar: PageAppBar(
+        title: l10n.help_support,
+        elevation: 0,
+      ),
       body: Container(),
     );
   }

@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:verdora_app/core/extensions/src/build_context_etx.dart';
 import 'package:verdora_app/core/routes/src/app_router.dart';
+import 'package:verdora_app/feature/cart/widgets/cart_item.dart';
 import 'package:verdora_app/l10n/l10n.dart';
 import 'package:verdora_app/shared/widgets/src/app_bars/src/title_app_bar.dart';
 import 'package:verdora_app/shared/widgets/src/buttons/buttons.dart';
+import 'package:verdora_app/shared/widgets/src/buttons/src/checkout_button.dart';
 import 'package:verdora_app/shared/widgets/src/modals/custom_modals.dart';
 
 class CartPage extends StatelessWidget {
@@ -36,11 +38,11 @@ class _CartViewState extends State<CartView> {
     final l10n = context.l10n;
     final textTheme = context.textTheme;
     final colors = context.colors;
+
     return Scaffold(
       appBar: MainAppBar(
-        title: 'My Cart',
+        title: l10n.my_cart,
         showBackButton: false,
-        elevation: 0,
         isCenterTitle: false,
         actions: [
           CupertinoButton(
@@ -92,8 +94,9 @@ class _CartViewState extends State<CartView> {
                         const SizedBox(height: 10),
                         CustomOutlineButton(
                           textStyle: textTheme.titleLarge?.copyWith(
-                            color: colors.vButtonColor,
+                            color: colors.vErrorColor,
                           ),
+                          color: colors.vErrorColor,
                           title: l10n.cancel,
                           onPressed: () => modalContext.pop(),
                         ),
@@ -109,8 +112,32 @@ class _CartViewState extends State<CartView> {
           ),
         ],
       ),
-      body: const Center(
-        child: Text('Cart Page'),
+      body: Stack(
+        children: [
+          RefreshIndicator.adaptive(
+            onRefresh: () async {},
+            child: ListView.separated(
+              itemCount: 10,
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 100),
+              separatorBuilder: (context, index) {
+                return Divider(
+                  height: 0,
+                  thickness: 1,
+                  color: colors.neutral90,
+                  endIndent: 10,
+                  indent: 10,
+                );
+              },
+              itemBuilder: (context, index) {
+                return const SizedBox(
+                  height: 115,
+                  child: CartItem(),
+                );
+              },
+            ),
+          ),
+          const CheckOutButton(),
+        ],
       ),
     );
   }

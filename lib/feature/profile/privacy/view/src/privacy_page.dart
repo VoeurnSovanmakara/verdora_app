@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:verdora_app/l10n/l10n.dart';
 import 'package:verdora_app/shared/widgets/src/app_bars/app_bar.dart';
 
 class PrivacyPage extends StatelessWidget {
@@ -10,9 +11,10 @@ class PrivacyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Scaffold(
-      appBar: const PageAppBar(
-        title: 'Privacy',
+      appBar: PageAppBar(
+        title: l10n.privacy_policy,
         elevation: 0,
       ),
       body: Container(),

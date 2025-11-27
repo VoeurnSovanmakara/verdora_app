@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:verdora_app/core/extensions/src/build_context_etx.dart';
 import 'package:verdora_app/core/theme/colors.dart';
+import 'package:verdora_app/l10n/l10n.dart';
 import 'package:verdora_app/shared/widgets/src/buttons/buttons.dart';
 
 class CheckOutButton extends StatelessWidget {
@@ -11,7 +12,7 @@ class CheckOutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.colors;
-    // final l10n = context.l10n;
+    final l10n = context.l10n;
     final textTheme = context.textTheme;
     // return BlocBuilder<CartBloc, CartState>(
     //   builder: (context, state) {
@@ -159,15 +160,15 @@ class CheckOutButton extends StatelessWidget {
                 ),
               ),
             ),
-            const Row(
+            Row(
               children: [
-                Text('Checkout'),
-                Padding(
+                Text(l10n.checkout),
+                const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4),
                   child: Text('·'),
                 ),
                 // Text('\$${totalPrice.toStringAsFixed(2)}'),
-                Text(r'$20.00'),
+                const Text(r'$20.00'),
               ],
             ),
             const Icon(

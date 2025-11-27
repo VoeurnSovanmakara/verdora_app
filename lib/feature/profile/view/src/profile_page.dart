@@ -67,7 +67,7 @@ class _ProfileViewState extends State<ProfileView> {
             padding: const EdgeInsets.all(Spacing.m),
             child: Column(
               children: [
-                if (isLoggedIn) ...[
+                // if (isLoggedIn) ...[
                   const CircleAvatar(
                   radius: 55,
                   backgroundImage: NetworkImage(
@@ -87,40 +87,42 @@ class _ProfileViewState extends State<ProfileView> {
                     color: colors.darkShadeGrey60,
                   ),
                 ),
-                ] else ...[
-                  CircleAvatar(
-                    backgroundColor: colors.vIconColor,
-                    radius: 40,
-                    child: Icon(
-                      IconsaxPlusLinear.user,
-                      color: colors.greenPrimary,
-                      size: 50,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Text(
-                    l10n.you_are_not_signed_in,
-                    style: textTheme.bodyLarge?.copyWith(),
-                  ),
-                  CupertinoButton(
-                    color: colors.transparent,
-                    child: Text(
-                      l10n.sign_in,
-                      style: textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    onPressed: () async {
-                      await context.pushNamed(
-                        Pages.login.name,
-                      );
-                    },
-                  ),
-                ],
+                // todo:
+                // ] else ...[
+                //   CircleAvatar(
+                //     backgroundColor: colors.vIconColor,
+                //     radius: 40,
+                //     child: Icon(
+                //       IconsaxPlusLinear.user,
+                //       color: colors.greenPrimary,
+                //       size: 50,
+                //     ),
+                //   ),
+                //   const SizedBox(
+                //     height: 12,
+                //   ),
+                //   Text(
+                //     l10n.you_are_not_signed_in,
+                //     style: textTheme.bodyLarge?.copyWith(),
+                //   ),
+                //   CupertinoButton(
+                //     color: colors.transparent,
+                //     child: Text(
+                //       l10n.sign_in,
+                //       style: textTheme.titleLarge?.copyWith(
+                //         fontWeight: FontWeight.bold,
+                //       ),
+                //     ),
+                //     onPressed: () async {
+                //       await context.pushNamed(
+                //         Pages.login.name,
+                //       );
+                //     },
+                //   ),
+                // ],
 
-                if (isLoggedIn) ...[
+                // todo:
+                // if (isLoggedIn) ...[
                   const SizedBox(height: Spacing.l4),
                   Column(
                     children: [
@@ -152,7 +154,7 @@ class _ProfileViewState extends State<ProfileView> {
                                 await context.pushNamed(Pages.editProfile.name);
                               },
                               title: Text(
-                                'Edit Profile',
+                              l10n.edit_profile,
                                 style: textTheme.bodyLarge?.copyWith(
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -193,14 +195,14 @@ class _ProfileViewState extends State<ProfileView> {
                       ),
                     ],
                   ),
-                ],
+                // ],
                 const SizedBox(height: Spacing.l4),
                 Column(
                   children: [
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Settings',
+                        l10n.setting,
                         style: textTheme.displaySmall?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -218,13 +220,13 @@ class _ProfileViewState extends State<ProfileView> {
                         children: [
                           ListTile(
                             leading: Icon(
-                              IconsaxPlusLinear.notification,
+                              IconsaxPlusLinear.heart,
                               color: colors.neutral0,
                             ),
                             onTap: () =>
-                                context.pushNamed(Pages.notification.name),
+                                context.pushNamed(Pages.favorite.name),
                             title: Text(
-                              'Notifications',
+                              l10n.favorite,
                               style: textTheme.bodyLarge?.copyWith(
                                 fontWeight: FontWeight.w500,
                               ),
@@ -327,7 +329,7 @@ class _ProfileViewState extends State<ProfileView> {
                               );
                             },
                             title: Text(
-                              'Language',
+                              l10n.language,
                               style: textTheme.bodyLarge?.copyWith(
                                 fontWeight: FontWeight.w500,
                               ),
@@ -355,7 +357,7 @@ class _ProfileViewState extends State<ProfileView> {
                                 title: Text(
                                   isDark ? l10n.dark_mode : l10n.light_mode,
                                   style: textTheme.bodyLarge?.copyWith(
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                                 trailing: CupertinoSwitch(
@@ -383,12 +385,12 @@ class _ProfileViewState extends State<ProfileView> {
                           ),
                           ListTile(
                             leading: Icon(
-                              IconsaxPlusLinear.shield_security,
+                              IconsaxPlusLinear.info_circle,
                               color: colors.neutral0,
                             ),
-                            onTap: () => context.pushNamed(Pages.privacy.name),
+                            onTap: () {},
                             title: Text(
-                              'Privacy',
+                              l10n.about_us,
                               style: textTheme.bodyLarge?.copyWith(
                                 fontWeight: FontWeight.w500,
                               ),
@@ -406,13 +408,36 @@ class _ProfileViewState extends State<ProfileView> {
                           ),
                           ListTile(
                             leading: Icon(
-                              IconsaxPlusLinear.info_circle,
+                              IconsaxPlusLinear.shield_security,
+                              color: colors.neutral0,
+                            ),
+                            onTap: () => context.pushNamed(Pages.privacy.name),
+                            title: Text(
+                              l10n.privacy_policy,
+                              style: textTheme.bodyLarge?.copyWith(
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            trailing: const Icon(
+                              Icons.arrow_forward_ios_rounded,
+                            ),
+                          ),
+                          Divider(
+                            height: 0,
+                            thickness: 1,
+                            color: colors.lightShadeGrey30,
+                            endIndent: 12,
+                            indent: 12,
+                          ),
+                          ListTile(
+                            leading: Icon(
+                              Icons.support_agent_outlined,
                               color: colors.neutral0,
                             ),
                             onTap: () =>
                                 context.pushNamed(Pages.helpSupport.name),
                             title: Text(
-                              'Help & Support',
+                              l10n.help_support,
                               style: textTheme.bodyLarge?.copyWith(
                                 fontWeight: FontWeight.w500,
                               ),
@@ -427,7 +452,8 @@ class _ProfileViewState extends State<ProfileView> {
                   ],
                 ),
                 const SizedBox(height: Spacing.l4),
-                if (isLoggedIn)
+                // todo:
+                // if (isLoggedIn)
                   CustomButton(
                     backgroundColor: Colors.red.withValues(alpha: 0.2),
                     title: 'Log Out',

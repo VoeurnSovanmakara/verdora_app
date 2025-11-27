@@ -1,16 +1,15 @@
 import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:verdora_app/core/extensions/src/build_context_etx.dart';
 import 'package:verdora_app/core/routes/routes.dart';
-import 'package:verdora_app/feature/auth/bloc/auth_bloc.dart';
 import 'package:verdora_app/feature/auth/forgot_password/view/src/forgot_password_page.dart';
 import 'package:verdora_app/feature/auth/login/login.dart';
 import 'package:verdora_app/feature/auth/sign_up/sign_up.dart';
 import 'package:verdora_app/feature/cart/view/view.dart';
+import 'package:verdora_app/feature/favorite/favorite.dart';
 import 'package:verdora_app/feature/home/view/src/home_page.dart';
 import 'package:verdora_app/feature/order/order.dart';
 import 'package:verdora_app/feature/profile/change_password/view/src/change_password_page.dart';
@@ -69,6 +68,9 @@ class AppRouter {
   );
   static final orderShellNavigatorKey = GlobalKey<NavigatorState>(
     debugLabel: 'order',
+  );
+  static final notificationShellNavigatorKey = GlobalKey<NavigatorState>(
+    debugLabel: 'notification',
   );
   static final profileShellNavigatorKey = GlobalKey<NavigatorState>(
     debugLabel: 'profile',
@@ -142,6 +144,13 @@ class AppRouter {
             pageBuilder: (context, state) =>
                 SearchPage.page(key: state.pageKey),
           ),
+          // favoritre
+          GoRoute(
+            name: Pages.favorite.name,
+            path: 'favorite',
+            pageBuilder: (context, state) =>
+                FavoritePage.page(key: state.pageKey),
+          ),
           StatefulShellRoute.indexedStack(
             builder: (context, state, navigationShell) {
               navigationBottomBarShell = navigationShell;
@@ -192,6 +201,18 @@ class AppRouter {
                 ],
               ),
               StatefulShellBranch(
+                navigatorKey: notificationShellNavigatorKey,
+                routes: [
+                  GoRoute(
+                    path: 'notification',
+                    name: Pages.notification.name,
+                    pageBuilder: (context, state) =>
+                        NotificationPage.page(key: state.pageKey),
+                  ),
+                ],
+              ),
+              
+              StatefulShellBranch(
                 navigatorKey: profileShellNavigatorKey,
                 routes: [
                   GoRoute(
@@ -215,14 +236,6 @@ class AppRouter {
                         path: 'change-password',
                         pageBuilder: (context, state) {
                           return ChangePasswordPage.page(key: state.pageKey);
-                        },
-                      ),
-                      GoRoute(
-                        name: Pages.notification.name,
-                        parentNavigatorKey: rootNavigatorKey,
-                        path: 'notification',
-                        pageBuilder: (context, state) {
-                          return NotificationPage.page(key: state.pageKey);
                         },
                       ),
                       GoRoute(
@@ -285,19 +298,24 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
 
   @override
   Widget build(BuildContext context) {
-    final authBloc = context.watch<AuthBloc>();
-    final isLoggedIn = authBloc.state.isLoggedIn;
+    // final authBloc = context.watch<AuthBloc>();
+    // final isLoggedIn = authBloc.state.isLoggedIn;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: widget.child,
-      extendBody: true,
       bottomNavigationBar: CrystalNavigationBar(
-        backgroundColor: context.colors.primary.withValues(alpha: 0.15),
+        backgroundColor: context.colors.vContainerColor,
         currentIndex: Pages.values.indexOf(_selectedTab),
         unselectedItemColor: context.colors.dark,
         indicatorColor: context.colors.primary,
         onTap: _handleIndexChanged,
         borderRadius: 15,
+        enableFloatingNavBar: false,
+        margin: const EdgeInsets.only(
+          left: 16,
+          right: 16,
+          bottom: 20,
+        ),
         items: [
           CrystalNavigationBarItem(
             icon: IconsaxPlusBold.home_1,
@@ -305,14 +323,25 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
             selectedColor: context.colors.primary,
           ),
           CrystalNavigationBarItem(
-            icon: IconsaxPlusBold.shopping_bag,
-            unselectedIcon: IconsaxPlusLinear.shopping_bag,
+            icon: IconsaxPlusBold.shopping_cart,
+            unselectedIcon: IconsaxPlusLinear.shopping_cart,
             selectedColor: context.colors.primary,
+            badge: const Badge(
+              label: Text('10'),
+            ),
           ),
           CrystalNavigationBarItem(
             icon: IconsaxPlusBold.receipt_text,
             unselectedIcon: IconsaxPlusLinear.receipt_text,
             selectedColor: context.colors.primary,
+          ),
+          CrystalNavigationBarItem(
+            icon: IconsaxPlusBold.notification,
+            unselectedIcon: IconsaxPlusLinear.notification,
+            selectedColor: context.colors.primary,
+            badge: const Badge(
+              label: Text('1'),
+            ),
           ),
           CrystalNavigationBarItem(
             icon: IconsaxPlusBold.profile_circle,

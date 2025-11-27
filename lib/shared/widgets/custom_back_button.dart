@@ -56,6 +56,10 @@ class CustomBackButton extends StatelessWidget {
                   BlendMode.srcIn,
                 ),
               ),
+          // Icon(
+          //   Icons.arrow_back_ios_new_rounded,
+          //   color: color ?? context.colors.pureDark,
+          // )
 
         ),
       ),

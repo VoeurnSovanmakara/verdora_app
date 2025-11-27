@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:verdora_app/l10n/l10n.dart';
 import 'package:verdora_app/shared/widgets/src/app_bars/app_bar.dart';
 
 class NotificationPage extends StatelessWidget {
@@ -24,10 +25,12 @@ class NotificationView extends StatefulWidget {
 class _NotificationViewState extends State<NotificationView> {
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Scaffold(
-      appBar: const PageAppBar(
-        title: 'Notification',
-        elevation: 0,
+      appBar: MainAppBar(
+        title: l10n.notifications,
+        isCenterTitle: false,
+        showBackButton: false,
       ),
       body: Container(),
     );

@@ -45,6 +45,13 @@ class _HomeViewState extends State<HomeView> {
               color: colors.dark,
             ),
           ),
+          IconButton(
+            onPressed: () => context.pushNamed(Pages.favorite.name),
+            icon: Icon(
+              IconsaxPlusLinear.heart,
+              color: colors.dark,
+            ),
+          ),
         ],
       ),
       

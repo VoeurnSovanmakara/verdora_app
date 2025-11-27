@@ -21,7 +21,6 @@ class OrderItem extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: colors.vContainerColor,
-          boxShadow: kCardShadow,
         ),
         child: Column(
           children: [

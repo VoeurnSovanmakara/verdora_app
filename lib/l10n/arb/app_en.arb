@@ -81,5 +81,47 @@
     "description": "Button Lable to sign in"
   },
   "you_are_not_signed_in": "You are not signed in",
-  "@you_are_not_signed_in": {}
+  "@you_are_not_signed_in": {},
+  "language": "Language",
+  "@language": {
+    "description": "language lable"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "notifications tab lable"
+  },
+  "edit_profile": "Edit Profile",
+  "@edit_profile": {
+    "description": "Edit Profile lable"
+  },
+  "about_us": "About us",
+  "@about_us": {
+    "description": "about us lable"
+  },
+  "privacy_policy": "Privacy Policy",
+  "@privacy_policy": {},
+  "help_support": "Help & Support",
+  "@help_support": {
+    "description": "help support lable"
+  },
+  "my_cart": "My Cart",
+  "@my_cart": {
+    "description": "MY Cart App bar lable"
+  },
+  "favorite": "Favorite",
+  "@favorite": {
+    "description": "Favorite App Bar Lable"
+  },
+  "my_order": "My Orders",
+  "@my_order": {
+    "description": "My Order app bar lable"
+  },
+  "setting": "Settings",
+  "@setting": {},
+  "save": "Save",
+  "@save": {},
+  "checkout": "Checkout",
+  "@checkout": {
+    "description": "checkout button lable"
+  }
 }

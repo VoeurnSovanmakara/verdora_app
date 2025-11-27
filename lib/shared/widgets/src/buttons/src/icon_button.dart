@@ -26,7 +26,7 @@ class CustomIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final buttonHeight = height ?? 50;
-    final buttonBorderRadius = borderRadius ?? 24;
+    final buttonBorderRadius = borderRadius ?? 12;
     final buttonBackgroundColor =
         backgroundColor ?? context.colors.greenPrimary;
     final buttonForegroundColor = foregroundColor ?? Colors.white;

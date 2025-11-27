@@ -81,5 +81,47 @@
     "description": "Button Lable to sign in"
   },
   "you_are_not_signed_in": "អ្នកមិនទាន់បានចុះឈ្មោះ",
-  "@you_are_not_signed_in": {}
+  "@you_are_not_signed_in": {},
+  "language": "ភាសា",
+  "@language": {
+    "description": "language lable"
+  },
+  "notifications": "ការជូនដំណឹង",
+  "@notifications": {
+    "description": "notifications tab lable"
+  },
+  "edit_profile": "កែប្រវត្តិរូប",
+  "@edit_profile": {
+    "description": "Edit Profile lable"
+  },
+  "about_us": "អំពីពួកយើង",
+  "@about_us": {
+    "description": "about us lable"
+  },
+  "privacy_policy": "គោលការណ៍​ពីព័ត៌មានផ្ទាល់ខ្លួន",
+  "@privacy_policy": {},
+  "help_support": "ជំនួយ និងការគាំទ្រ",
+  "@help_support": {
+    "description": "help support lable"
+  },
+  "my_cart": "កន្រ្តក",
+  "@my_cart": {
+    "description": "MY Cart App bar lable"
+  },
+  "favorite": "ពេញចិត្ត",
+  "@favorite": {
+    "description": "My Favorite App Bar Lable"
+  },
+  "my_order": "ការបញ្ជាទិញរបស់ខ្ងុំ",
+  "@my_order": {
+    "description": "My Order app bar lable"
+  },
+  "setting": "ការកំណត់",
+  "@setting": {},
+  "save": "រក្សាទុក",
+  "@save": {},
+  "checkout": "បន្តទិញ",
+  "@checkout": {
+    "description": "checkout button lable"
+  }
 }

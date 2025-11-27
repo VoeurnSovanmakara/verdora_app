@@ -37,8 +37,8 @@ class _EditProfileViewState extends State<EditProfileView> {
     final textTheme = context.textTheme;
     final l10n = context.l10n;
     return Scaffold(
-      appBar: const PageAppBar(
-        title: 'Edit Profile', 
+      appBar: PageAppBar(
+        title: l10n.edit_profile, 
         elevation: 0,
       ),
       body: Padding(
@@ -170,7 +170,7 @@ class _EditProfileViewState extends State<EditProfileView> {
       ),
       bottomNavigationBar: TransparentButton(
         children: CustomButton(
-          title: 'Save Changes',
+          title: l10n.save,
           onPressed: () {},
         ),
       )

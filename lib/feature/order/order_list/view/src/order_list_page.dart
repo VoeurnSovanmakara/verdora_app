@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:verdora_app/core/routes/src/app_router.dart';
 import 'package:verdora_app/core/theme/spacing.dart';
 import 'package:verdora_app/feature/order/order_list/widgets/src/order_item.dart';
+import 'package:verdora_app/l10n/l10n.dart';
 import 'package:verdora_app/shared/widgets/src/app_bars/src/title_app_bar.dart';
 
 class OrderListPage extends StatelessWidget {
@@ -28,11 +29,11 @@ class OrderListView extends StatefulWidget {
 class _OrderListViewState extends State<OrderListView> {
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Scaffold(
-      appBar: const MainAppBar(
-        title: 'My Orders',
+      appBar: MainAppBar(
+        title: l10n.my_order,
         showBackButton: false,
-        // elevation: 0,
         isCenterTitle: false,
       ),
       body: RefreshIndicator.adaptive(
