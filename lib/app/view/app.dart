@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:verdora_app/core/app_bloc/lang/language_bloc.dart';
+import 'package:verdora_app/core/di/locator.dart';
 import 'package:verdora_app/core/enum/src/theme_status.dart';
 import 'package:verdora_app/core/routes/routes.dart';
 import 'package:verdora_app/core/theme/bloc/theme_bloc.dart';
 import 'package:verdora_app/core/theme/src/dark_theme.dart';
 import 'package:verdora_app/core/theme/src/light_theme.dart';
+import 'package:verdora_app/feature/auth/bloc/auth_bloc.dart';
 import 'package:verdora_app/l10n/gen/app_localizations.dart';
+import 'package:verdora_app/repositories/repository/src/auth_repository.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -24,35 +28,50 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     final goRouter = AppRouter.router;
-    return MultiBlocProvider(
+    final sharedPref = getIt<SharedPreferences>();
+    return MultiRepositoryProvider(
       providers: [
-        BlocProvider(
-          create: (context) => LanguageBloc(),
-        ),
-        BlocProvider(
-          create: (context) => ThemeBloc(),
+        RepositoryProvider(
+          create: (context) => AuthRepository(),
         ),
       ],
-      child: Builder(
-        builder: (context) {
-          final themeState = context.watch<ThemeBloc>().state;
-          final languageState = context.watch<LanguageBloc>().state;
-          return GestureDetector(
-            onTap: () {
-              WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
-            },
-            child: MaterialApp.router(
-              theme: themeState.selectTheme == ThemeColor.darkMode
-                  ? darkTheme
-                  : lightTheme,
-              routerConfig: goRouter,
-              debugShowCheckedModeBanner: false,
-              locale: languageState.selectLanguage,
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              supportedLocales: AppLocalizations.supportedLocales,
+      child: MultiBlocProvider(
+        providers: [
+          // Global Provider
+          BlocProvider(
+            create: (context) => AuthBloc(
+              authRepo: context.read<AuthRepository>(),
+              prefs: sharedPref,
             ),
-          );
-        },
+          ),
+          BlocProvider(
+            create: (context) => LanguageBloc(),
+          ),
+          BlocProvider(
+            create: (context) => ThemeBloc(),
+          ),
+        ],
+        child: Builder(
+          builder: (context) {
+            final themeState = context.watch<ThemeBloc>().state;
+            final languageState = context.watch<LanguageBloc>().state;
+            return GestureDetector(
+              onTap: () {
+                WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
+              },
+              child: MaterialApp.router(
+                theme: themeState.selectTheme == ThemeColor.darkMode
+                    ? darkTheme
+                    : lightTheme,
+                routerConfig: goRouter,
+                debugShowCheckedModeBanner: false,
+                locale: languageState.selectLanguage,
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+              ),
+            );
+          },
+        ),
       ),
     );
   }

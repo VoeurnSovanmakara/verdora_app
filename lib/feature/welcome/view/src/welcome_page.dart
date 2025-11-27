@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:verdora_app/core/di/locator.dart';
 import 'package:verdora_app/core/extensions/src/build_context_etx.dart';
 import 'package:verdora_app/core/routes/src/app_router.dart';
 import 'package:verdora_app/core/theme/spacing.dart';
@@ -26,6 +28,16 @@ class WelcomeView extends StatefulWidget {
 }
 
 class _WelcomeViewState extends State<WelcomeView> {
+
+  @override
+  void dispose() {
+    getIt<SharedPreferences>().setBool(
+      'isFirstRun',
+      false,
+    );
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final colors = context.colors;
@@ -33,12 +45,12 @@ class _WelcomeViewState extends State<WelcomeView> {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding:  const EdgeInsets.all(Spacing.l1),
+          padding: const EdgeInsets.all(Spacing.l1),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/images/onboarding.png', 
+                'assets/images/onboarding.png',
               ),
               const SizedBox(height: Spacing.normal),
               Text(
@@ -54,20 +66,23 @@ class _WelcomeViewState extends State<WelcomeView> {
                 textAlign: TextAlign.center,
                 style: textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w400,
-                  color: colors.darkShadeGrey70
+                  color: colors.darkShadeGrey70,
                 ),
               ),
               const SizedBox(height: Spacing.l4),
-              CustomButton(title: 'Sign Up', onPressed: () async {
+              CustomButton(
+                title: 'Sign Up',
+                onPressed: () async {
                   await context.pushNamed(Pages.signup.name);
                 },
               ),
               const SizedBox(height: Spacing.normal),
-              CustomButton(title: 'Log In', onPressed: () async {
+              CustomButton(
+                title: 'Log In',
+                onPressed: () async {
                   await context.pushNamed(Pages.login.name);
                 },
               ),
-
             ],
           ),
         ),

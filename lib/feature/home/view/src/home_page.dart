@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:verdora_app/core/extensions/src/build_context_etx.dart';
+import 'package:verdora_app/core/routes/src/app_router.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -33,12 +35,11 @@ class _HomeViewState extends State<HomeView> {
         title: const Text('Verdora'),
         titleTextStyle: textTheme.displayMedium?.copyWith(
           fontWeight: FontWeight.bold,
-          color: colors.dark,
         ),
         actionsPadding: const EdgeInsets.symmetric(horizontal: 12),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => context.pushNamed(Pages.search.name),
             icon: Icon(
               IconsaxPlusLinear.search_normal_1,
               color: colors.dark,

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:verdora_app/core/extensions/src/build_context_etx.dart';
@@ -39,8 +40,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
     final l10n = context.l10n;
     final colors = context.colors;
     return AppBar(
-      elevation: 1,
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      elevation: 0,
       leading: const SizedBox(),
       centerTitle: false,
       bottom: widget.bottom,
@@ -54,10 +54,12 @@ class _SearchAppBarState extends State<SearchAppBar> {
               context.pop();
             },
             minimumSize: Size.zero,
-            child: Icon(
-              Icons.arrow_back_ios,
-              size: 24,
-              color: context.colors.greenPrimary,
+            child: SvgPicture.asset(
+              'assets/svgs/arrow_back.svg',
+              colorFilter: ColorFilter.mode(
+                colors.pureDark,
+                BlendMode.srcIn,
+              ),
             ),
           ),
           const SizedBox(width: Spacing.m),

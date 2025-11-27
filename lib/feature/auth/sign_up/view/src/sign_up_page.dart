@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:verdora_app/core/extensions/src/build_context_etx.dart';
-import 'package:verdora_app/core/routes/src/app_router.dart';
 import 'package:verdora_app/core/theme/spacing.dart';
+import 'package:verdora_app/shared/widgets/src/app_bars/src/page_app_bar.dart';
 import 'package:verdora_app/shared/widgets/src/buttons/src/custom_button.dart';
 import 'package:verdora_app/shared/widgets/src/form_inputs/src/custome_text_field.dart';
 
@@ -31,10 +29,12 @@ class SignUpView extends StatefulWidget {
 class _SignUpViewState extends State<SignUpView> {
   @override
   Widget build(BuildContext context) {
-    final colors = context.colors;
     final textTheme = context.textTheme;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const PageAppBar(
+        title: '',
+        elevation: 0,
+      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(Spacing.l1),
@@ -80,39 +80,12 @@ class _SignUpViewState extends State<SignUpView> {
               Text('Use 8 or more characters with a mix of letters, numbers & symbols',
                 style: textTheme.bodySmall?.copyWith(
                   fontWeight: FontWeight.w500,
-                  color: colors.vDarkTextColor.withValues(alpha: 0.7)
                 ),
               ),
               const SizedBox(height: Spacing.l4),
               CustomButton(
                 title: 'Create account',
                 onPressed: ()  {},
-              ),
-              const SizedBox(height: Spacing.normal),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Already have an account? ',
-                    style: textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: colors.vDarkTextColor.withValues(alpha: 0.7)
-                    ),
-                  ),
-                  CupertinoButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () async {
-                      await context.pushNamed(Pages.login.name);
-                    },
-                    child: Text(
-                      'Log In',
-                      style: textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: colors.vButtonColor,
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
-                  ),
-                ],
               ),
             ],
           ),

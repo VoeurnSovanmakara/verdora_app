@@ -51,12 +51,6 @@ class CustomBackButton extends StatelessWidget {
           child: icon ??
               SvgPicture.asset(
                 'assets/svgs/arrow_back.svg',
-                // height: 26,
-                // width: 26,
-
-                // colorFilter: color != null
-                //     ? ColorFilter.mode(color!, BlendMode.srcIn)
-                //     : null,
                 colorFilter: ColorFilter.mode(
                   color ?? context.colors.pureDark,
                   BlendMode.srcIn,

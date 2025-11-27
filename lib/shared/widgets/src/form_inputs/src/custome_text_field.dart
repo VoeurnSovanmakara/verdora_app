@@ -196,7 +196,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             fillColor: widget.fillColors ?? context.colors.lightShadeGrey20,
             filled: widget.filled,
             hintText: widget.hintText,
-            hintStyle: TextStyle(color: context.colors.darkShadeGrey60),
+            hintStyle: TextStyle(color: context.colors.greyLight),
             prefixIcon: widget.prefixIcon,
             suffixIcon: widget.suffixIcon,
             suffixIconConstraints: widget.suffixIconConstraints,

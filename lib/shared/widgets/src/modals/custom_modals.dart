@@ -32,7 +32,7 @@ class CustomModal {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(radius)),
       ),
-      backgroundColor: context.colors.neutral100,
+      backgroundColor: context.colors.neutral92,
       context: context,
       builder: builder,
     );

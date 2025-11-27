@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:verdora_app/core/extensions/src/build_context_etx.dart';
 
 class CustomOutlineButton extends StatelessWidget {
   const CustomOutlineButton({
@@ -26,7 +27,7 @@ class CustomOutlineButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final buttonHeight = height ?? 45;
     final buttonBorderRadius = borderRadius ?? 12;
-    final buttonColor = color ?? Theme.of(context).colorScheme.primary;
+    final buttonColor = color ?? context.colors.vButtonColor;
 
     return OutlinedButton(
       style: OutlinedButton.styleFrom(

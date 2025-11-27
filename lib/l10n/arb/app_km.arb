@@ -39,5 +39,47 @@
   "select_language": "ជ្រើសរើសភាសា",
   "@select_language": {
     "description": "select language lable"
-  }
+  },
+  "delivery_address": "អាសយដ្ឋានដឹកជញ្ជូន",
+  "@delivery_address": {
+    "description": "Delivery Address App bar tittle"
+  },
+  "home_address": "ផ្ទះ",
+  "@home_address": {
+    "description": "Home Address Label"
+  },
+  "company": "ក្រុមហ៊ុន",
+  "@company": {
+    "description": "Company Address Label"
+  },
+  "school": "សាលា",
+  "@school": {
+    "description": "School Address Label"
+  },
+  "other": "ផ្សេងៗ",
+  "@other": {
+    "description": "Other Address Label"
+  },
+  "clear": "លុប",
+  "@clear": {
+    "description": "Clear lable cart"
+  },
+  "are_you_sure": "តើអ្នកប្រាកដទេ?",
+  "@are_you_sure": {
+    "description": "Popup title message for delete address"
+  },
+  "ok": "យល់ព្រម",
+  "@ok": {
+    "description": "Alert Button Lable to okie"
+  },
+  "clear_all_cart": "កន្រ្តក នឹងត្រូវបានលុបចេញ",
+  "@clear_all_cart": {
+    "description": "Cart all cart lable"
+  },
+  "sign_in": "ចូលគណនី",
+  "@sign_in": {
+    "description": "Button Lable to sign in"
+  },
+  "you_are_not_signed_in": "អ្នកមិនទាន់បានចុះឈ្មោះ",
+  "@you_are_not_signed_in": {}
 }

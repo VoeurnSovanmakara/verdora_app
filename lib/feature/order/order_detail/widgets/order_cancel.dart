@@ -21,8 +21,8 @@ class _OrderCancelState extends State<OrderCancel> {
     return Container(
       // color: colors.pureWhite,
       padding: const EdgeInsets.only(
-        left: Spacing.normal,
-        right: Spacing.normal,
+        // left: Spacing.normal,
+        // right: Spacing.normal,
         bottom: Spacing.m,
       ),
       child: CustomButton(
@@ -33,7 +33,7 @@ class _OrderCancelState extends State<OrderCancel> {
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
             ),
-            backgroundColor: colors.pureWhite,
+            backgroundColor: colors.neutral92,
             context: context,
             // builder: (modalContext) => BlocProvider.value(
             //   value: context.read<OrderDetailBloc>(),

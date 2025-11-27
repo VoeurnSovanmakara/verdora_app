@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "717273637958",
+    "project_id": "verdora-app",
+    "storage_bucket": "verdora-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717273637958:android:7856cf51fe01a2dca5d647",
+        "android_client_info": {
+          "package_name": "com.example.verygoodcore.verdora_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBm65mVTfTfI3f42AhxqfGpTY0t6VieMp8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

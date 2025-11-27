@@ -67,7 +67,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
         bottom: bottom,
         title: Text(
           title,
-          style: context.textTheme.displaySmall,
+          style: context.textTheme.displayMedium,
         ),
       ),
     );

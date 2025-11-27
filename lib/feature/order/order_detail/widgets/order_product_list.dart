@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:verdora_app/core/extensions/src/build_context_etx.dart';
 import 'package:verdora_app/core/theme/spacing.dart';
+import 'package:verdora_app/shared/widgets/custom_image.dart';
 import 'package:verdora_app/shared/widgets/product_order_item.dart';
-import 'package:verdora_app/shared/widgets/transparent_image.dart';
 
 class OrderProductList extends StatelessWidget {
   const OrderProductList({super.key});
@@ -13,7 +13,7 @@ class OrderProductList extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: Spacing.normal,
-        vertical: Spacing.l2,
+        vertical: Spacing.l,
       ),
       decoration: BoxDecoration(
         color: colors.vContainerColor,
@@ -24,7 +24,7 @@ class OrderProductList extends StatelessWidget {
         children: [
           Text(
             'Ordered Summary',
-            style: context.textTheme.titleMedium?.copyWith(
+            style: context.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -34,15 +34,10 @@ class OrderProductList extends StatelessWidget {
               const SizedBox(
                 width: 32,
                 height: 32,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8),
-                  ),
-                  child: TransparentImage(
-                    url:
-                        'https://static.thenounproject.com/png/cash-delivery-icon-890892-512.png',
-                    enableCache: true,
-                  ),
+                child: CustomImage(
+                  url:
+                      'https://www.tratopup.com/_next/image?url=%2Fassets%2Fmain%2Fkhqr-lg.webp&w=3840&q=75',
+                  enableCache: true,
                 ),
               ),
               const SizedBox(width: Spacing.m),
@@ -51,19 +46,19 @@ class OrderProductList extends StatelessWidget {
                 children: [
                   Text(
                     // l10n.online_payment,
-                    'Cash on Delivery',
+                    'ONLINE',
                     style: context.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  // const SizedBox(height: Spacing.xs),
-                  // Text(
-                  //   // orderDetailData.paymentMethod ?? 'N/A',
-                  //   'Credit Card',
-                  //   style: textTheme.titleSmall?.copyWith(
-                  //     color: colors.darkShadeGrey70,
-                  //   ),
-                  // ),
+                  const SizedBox(height: Spacing.xs),
+                  Text(
+                    // orderDetailData.paymentMethod ?? 'N/A',
+                    'ABA KHQR',
+                    style: context.textTheme.titleSmall?.copyWith(
+                      // color: colors.darkShadeGrey70,
+                    ),
+                  ),
                 ],
               ),
             ],

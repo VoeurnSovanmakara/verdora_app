@@ -1,7 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
-import 'package:verdora_app/core/routes/src/app_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:verdora_app/core/di/locator.dart';
+import 'package:verdora_app/core/extensions/src/build_context_etx.dart';
+import 'package:verdora_app/feature/splash/bloc/splash_bloc.dart';
+import 'package:verdora_app/repositories/repository/src/auth_repository.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -12,7 +19,13 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SplashView();
+    return BlocProvider(
+      create: (context) => SplashBloc(
+        authRepository: context.read<AuthRepository>(),
+        prefs: getIt<SharedPreferences>(),
+      ),
+      child: const SplashView(),
+    );
   }
 }
 
@@ -26,10 +39,14 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.goNamed(Pages.app.name);
-    });
+    init();
     super.initState();
+  }
+
+  Future<void> init() async {
+    if (context.mounted) {
+      context.read<SplashBloc>().add(SplashEnsureInitializationToken());
+    }
   }
 
   @override
@@ -40,12 +57,24 @@ class _SplashViewState extends State<SplashView> {
     );
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(),
+    return BlocListener<SplashBloc, SplashState>(
+      listener: (context, state) {
+        if (state is SplashInitialized) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (!mounted) return;
+            context.goNamed(state.initialPage.name);
+          });
+        }
+      },
+      child: Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(
+            color: context.colors.primary,
+          ),
+        ),
       ),
     );
   }

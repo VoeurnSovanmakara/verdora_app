@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,9 +13,10 @@ import 'package:verdora_app/core/routes/src/app_router.dart';
 import 'package:verdora_app/core/theme/bloc/theme_bloc.dart';
 import 'package:verdora_app/core/theme/colors.dart';
 import 'package:verdora_app/core/theme/spacing.dart';
+import 'package:verdora_app/feature/auth/bloc/auth_bloc.dart';
 import 'package:verdora_app/l10n/l10n.dart';
 import 'package:verdora_app/shared/widgets/src/app_bars/app_bar.dart';
-import 'package:verdora_app/shared/widgets/src/buttons/src/custom_button.dart';
+import 'package:verdora_app/shared/widgets/src/buttons/buttons.dart';
 import 'package:verdora_app/shared/widgets/src/modals/custom_modals.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -48,10 +51,13 @@ class _ProfileViewState extends State<ProfileView> {
     final textTheme = context.textTheme;
     final l10n = context.l10n;
     final isDark = context.colorScheme.brightness == Brightness.dark;
+    final authBloc = context.watch<AuthBloc>();
+    final isLoggedIn = authBloc.state.isLoggedIn;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: const MainAppBar(
-        title: 'Profile',
+        title: '',
         showBackButton: false,
         elevation: 0,
       ),
@@ -61,7 +67,8 @@ class _ProfileViewState extends State<ProfileView> {
             padding: const EdgeInsets.all(Spacing.m),
             child: Column(
               children: [
-                const CircleAvatar(
+                if (isLoggedIn) ...[
+                  const CircleAvatar(
                   radius: 55,
                   backgroundImage: NetworkImage(
                     'https://i.pinimg.com/736x/68/a7/08/68a70868f1b8a3fef0e10316da07335f.jpg',
@@ -80,78 +87,113 @@ class _ProfileViewState extends State<ProfileView> {
                     color: colors.darkShadeGrey60,
                   ),
                 ),
-                const SizedBox(height: Spacing.l4),
-                Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'My Account',
-                        style: textTheme.displaySmall?.copyWith(
-                          fontWeight: FontWeight.bold,
+                ] else ...[
+                  CircleAvatar(
+                    backgroundColor: colors.vIconColor,
+                    radius: 40,
+                    child: Icon(
+                      IconsaxPlusLinear.user,
+                      color: colors.greenPrimary,
+                      size: 50,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    l10n.you_are_not_signed_in,
+                    style: textTheme.bodyLarge?.copyWith(),
+                  ),
+                  CupertinoButton(
+                    color: colors.transparent,
+                    child: Text(
+                      l10n.sign_in,
+                      style: textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () async {
+                      await context.pushNamed(
+                        Pages.login.name,
+                      );
+                    },
+                  ),
+                ],
+
+                if (isLoggedIn) ...[
+                  const SizedBox(height: Spacing.l4),
+                  Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'My Account',
+                          style: textTheme.displaySmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: Spacing.m),
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: colors.vContainerColor,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: kCardShadow,
-                      ),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            leading: Icon(
-                              IconsaxPlusLinear.edit_2,
-                              color: colors.neutral0,
-                            ),
-                            onTap: () async {
-                              await context.pushNamed(Pages.editProfile.name);
-                            },
-                            title: Text(
-                              'Edit Profile',
-                              style: textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.w500,
+                      const SizedBox(height: Spacing.m),
+                      Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: colors.vContainerColor,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: kCardShadow,
+                        ),
+                        child: Column(
+                          children: [
+                            ListTile(
+                              leading: Icon(
+                                IconsaxPlusLinear.edit_2,
+                                color: colors.neutral0,
+                              ),
+                              onTap: () async {
+                                await context.pushNamed(Pages.editProfile.name);
+                              },
+                              title: Text(
+                                'Edit Profile',
+                                style: textTheme.bodyLarge?.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              trailing: const Icon(
+                                Icons.arrow_forward_ios_rounded,
                               ),
                             ),
-                            trailing: const Icon(
-                              Icons.arrow_forward_ios_rounded,
+                            Divider(
+                              height: 0,
+                              thickness: 1,
+                              color: colors.lightShadeGrey30,
+                              endIndent: 12,
+                              indent: 12,
                             ),
-                          ),
-                          Divider(
-                            height: 0,
-                            thickness: 1,
-                            color: colors.lightShadeGrey30,
-                            endIndent: 12,
-                            indent: 12,
-                          ),
-                          ListTile(
-                            leading: Icon(
-                              IconsaxPlusLinear.key,
-                              color: colors.neutral0,
-                            ),
-                            onTap: () async {
-                              await context.pushNamed(
-                                Pages.changePassword.name,
-                              );
-                            },
-                            title: Text(
-                              'Change Password',
-                              style: textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.w500,
+                            ListTile(
+                              leading: Icon(
+                                IconsaxPlusLinear.key,
+                                color: colors.neutral0,
+                              ),
+                              onTap: () async {
+                                await context.pushNamed(
+                                  Pages.changePassword.name,
+                                );
+                              },
+                              title: Text(
+                                'Change Password',
+                                style: textTheme.bodyLarge?.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              trailing: const Icon(
+                                Icons.arrow_forward_ios_rounded,
                               ),
                             ),
-                            trailing: const Icon(
-                              Icons.arrow_forward_ios_rounded,
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                ],
                 const SizedBox(height: Spacing.l4),
                 Column(
                   children: [
@@ -179,7 +221,8 @@ class _ProfileViewState extends State<ProfileView> {
                               IconsaxPlusLinear.notification,
                               color: colors.neutral0,
                             ),
-                            onTap: () {},
+                            onTap: () =>
+                                context.pushNamed(Pages.notification.name),
                             title: Text(
                               'Notifications',
                               style: textTheme.bodyLarge?.copyWith(
@@ -207,71 +250,77 @@ class _ProfileViewState extends State<ProfileView> {
                                   .read<LanguageBloc>()
                                   .state;
                               final l10n = context.l10n;
-                              CustomModal.showRoundedModal(
-                                AppRouter.rootNavigatorKey.currentContext!,
-                                (modalContext) => BlocProvider.value(
-                                  value: context.read<LanguageBloc>(),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              l10n.select_language,
-                                              style: textTheme.titleLarge,
-                                            ),
-                                            IconButton(
-                                              onPressed: () {
-                                                modalContext.pop();
-                                              },
-                                              icon: const Icon(Icons.close),
-                                            ),
-                                          ],
-                                        ),
-                                        ListTile(
-                                          leading: Text(
-                                            '🇰🇭',
-                                            style: textTheme.displayLarge,
+                              unawaited(
+                                CustomModal.showRoundedModal(
+                                  AppRouter.rootNavigatorKey.currentContext!,
+                                  (modalContext) => BlocProvider.value(
+                                    value: context.read<LanguageBloc>(),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                l10n.select_language,
+                                                style: textTheme.titleLarge,
+                                              ),
+                                              IconButton(
+                                                onPressed: () {
+                                                  modalContext.pop();
+                                                },
+                                                icon: const Icon(Icons.close),
+                                              ),
+                                            ],
                                           ),
-                                          onTap: () {
-                                            _changeLanguage(const Locale('km'));
-                                          },
-                                          title: const Text('ភាសាខ្មែរ'),
-                                          trailing:
-                                              languageState.selectLanguage ==
-                                                  const Locale('km')
-                                              ? Icon(
-                                                  Icons.check_circle,
-                                                  color: colors.primary,
-                                                )
-                                              : null,
-                                        ),
-                                        ListTile(
-                                          leading: Text(
-                                            '🇺🇸',
-                                            style: textTheme.displayLarge,
+                                          ListTile(
+                                            leading: Text(
+                                              '🇰🇭',
+                                              style: textTheme.displayLarge,
+                                            ),
+                                            onTap: () {
+                                              _changeLanguage(
+                                                const Locale('km'),
+                                              );
+                                            },
+                                            title: const Text('ភាសាខ្មែរ'),
+                                            trailing:
+                                                languageState.selectLanguage ==
+                                                    const Locale('km')
+                                                ? Icon(
+                                                    Icons.check_circle,
+                                                    color: colors.primary,
+                                                  )
+                                                : null,
                                           ),
-                                          onTap: () {
-                                            _changeLanguage(const Locale('en'));
-                                          },
-                                          title: const Text('English'),
-                                          trailing:
-                                              languageState.selectLanguage ==
-                                                  const Locale('en')
-                                              ? Icon(
-                                                  Icons.check_circle,
-                                                  color: colors.primary,
-                                                )
-                                              : null,
-                                        ),
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                      ],
+                                          ListTile(
+                                            leading: Text(
+                                              '🇺🇸',
+                                              style: textTheme.displayLarge,
+                                            ),
+                                            onTap: () {
+                                              _changeLanguage(
+                                                const Locale('en'),
+                                              );
+                                            },
+                                            title: const Text('English'),
+                                            trailing:
+                                                languageState.selectLanguage ==
+                                                    const Locale('en')
+                                                ? Icon(
+                                                    Icons.check_circle,
+                                                    color: colors.primary,
+                                                  )
+                                                : null,
+                                          ),
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -337,7 +386,7 @@ class _ProfileViewState extends State<ProfileView> {
                               IconsaxPlusLinear.shield_security,
                               color: colors.neutral0,
                             ),
-                            onTap: () {},
+                            onTap: () => context.pushNamed(Pages.privacy.name),
                             title: Text(
                               'Privacy',
                               style: textTheme.bodyLarge?.copyWith(
@@ -360,7 +409,8 @@ class _ProfileViewState extends State<ProfileView> {
                               IconsaxPlusLinear.info_circle,
                               color: colors.neutral0,
                             ),
-                            onTap: () {},
+                            onTap: () =>
+                                context.pushNamed(Pages.helpSupport.name),
                             title: Text(
                               'Help & Support',
                               style: textTheme.bodyLarge?.copyWith(
@@ -377,62 +427,62 @@ class _ProfileViewState extends State<ProfileView> {
                   ],
                 ),
                 const SizedBox(height: Spacing.l4),
-                CustomButton(
-                  backgroundColor: Colors.red.withValues(alpha: 0.2),
-                  title: 'Log Out',
-                  textStyle: textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.w500,
-                    color: Colors.red,
-                  ),
-                  onPressed: () async {
-                    await CustomModal.showRoundedModal(
-                      AppRouter.rootNavigatorKey.currentContext!,
-                      (modalContext) => Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Are you sure you want to sign out?',
-                                  style: textTheme.titleLarge,
-                                ),
-                                IconButton(
-                                  onPressed: () {
-                                    modalContext.pop();
-                                  },
-                                  icon: const Icon(Icons.close),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            CustomButton(
-                              title: 'Log Out',
-                              onPressed: () async {
-                                modalContext.pop();
-                              },
-                            ),
-                            const SizedBox(height: 10),
-                            CustomButton(
-                              backgroundColor: colors.neutral100,
-                              foregroundColor: colors.neutral80,
-                              textStyle: textTheme.titleLarge?.copyWith(
-                                color: colors.primary,
+                if (isLoggedIn)
+                  CustomButton(
+                    backgroundColor: Colors.red.withValues(alpha: 0.2),
+                    title: 'Log Out',
+                    textStyle: textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.red,
+                    ),
+                    onPressed: () async {
+                      await CustomModal.showRoundedModal(
+                        AppRouter.rootNavigatorKey.currentContext!,
+                        (modalContext) => Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Are you sure you want to sign out?',
+                                    style: textTheme.titleLarge,
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      modalContext.pop();
+                                    },
+                                    icon: const Icon(Icons.close),
+                                  ),
+                                ],
                               ),
-                              title: 'Cancel',
-                              onPressed: () => modalContext.pop(),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                          ],
+                              const SizedBox(height: 10),
+                              CustomButton(
+                                title: 'Log Out',
+                                onPressed: () async {
+                                  modalContext.pop();
+                                },
+                              ),
+                              const SizedBox(height: 10),
+                              CustomOutlineButton(
+                                textStyle: textTheme.titleLarge?.copyWith(
+                                  color: colors.vButtonColor,
+                                ),
+                                title: 'Cancel',
+                                onPressed: () => modalContext.pop(),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                ),
+                      );
+                    },
+                  ),
                 const SizedBox(height: 150),
               ],
             ),

@@ -24,7 +24,7 @@ class Invoice extends StatelessWidget {
         children: [
           Text(
             'Fee Breakdown',
-            style: context.textTheme.titleMedium?.copyWith(
+            style: context.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.w600,
             ),
           ),

@@ -39,5 +39,47 @@
   "select_language": "Select Language",
   "@select_language": {
     "description": "select language lable"
-  }
+  },
+  "delivery_address": "Delivery Address",
+  "@delivery_address": {
+    "description": "Delivery Address App bar tittle"
+  },
+  "home_address": "Home",
+  "@home_address": {
+    "description": "Home Address Label"
+  },
+  "company": "Company",
+  "@company": {
+    "description": "Company Address Label"
+  },
+  "school": "School",
+  "@school": {
+    "description": "School Address Label"
+  },
+  "other": "Other",
+  "@other": {
+    "description": "Other Address Label"
+  },
+  "clear": "Clear",
+  "@clear": {
+    "description": "Clear lable cart"
+  },
+  "are_you_sure": "Are you sure?",
+  "@are_you_sure": {
+    "description": "Popup title message for delete address"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "Alert Button Lable to okie"
+  },
+  "clear_all_cart": "Cart wil be cleared",
+  "@clear_all_cart": {
+    "description": "Cart all cart lable"
+  },
+  "sign_in": "Sign In",
+  "@sign_in": {
+    "description": "Button Lable to sign in"
+  },
+  "you_are_not_signed_in": "You are not signed in",
+  "@you_are_not_signed_in": {}
 }

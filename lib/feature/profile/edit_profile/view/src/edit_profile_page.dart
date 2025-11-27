@@ -37,7 +37,7 @@ class _EditProfileViewState extends State<EditProfileView> {
     final textTheme = context.textTheme;
     final l10n = context.l10n;
     return Scaffold(
-      appBar: const MainAppBar(
+      appBar: const PageAppBar(
         title: 'Edit Profile', 
         elevation: 0,
       ),

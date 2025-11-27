@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:verdora_app/shared/widgets/src/app_bars/src/search_app_bar.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
@@ -21,10 +22,19 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
+  final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      appBar: SearchAppBar(controller: _searchController),
+      body: const Center(
         child: Text('Search Page'),
       ),
     );

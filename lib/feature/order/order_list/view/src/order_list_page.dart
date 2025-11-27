@@ -33,21 +33,26 @@ class _OrderListViewState extends State<OrderListView> {
         title: 'My Orders',
         showBackButton: false,
         // elevation: 0,
+        isCenterTitle: false,
       ),
-      body: ListView.separated(
-        itemCount: 10,
-        padding: const EdgeInsets.fromLTRB(
-          Spacing.m, 
-          Spacing.m, 
-          Spacing.m, 
-          150,
+      body: RefreshIndicator.adaptive(
+        onRefresh: () async {},
+        child: ListView.separated(
+          itemCount: 10,
+          padding: const EdgeInsets.fromLTRB(
+            Spacing.m,
+            Spacing.m,
+            Spacing.m,
+            150,
+          ),
+          separatorBuilder: (context, index) =>
+              const SizedBox(height: Spacing.s),
+          itemBuilder: (context, index) {
+            return OrderItem(
+              onPressed: () => context.pushNamed(Pages.orderDetails.name),
+            );
+          },
         ),
-        separatorBuilder: (context, index) => const SizedBox(height: Spacing.s),
-        itemBuilder: (context, index) {
-          return OrderItem(
-            onPressed: () => context.pushNamed(Pages.orderDetails.name),
-          );
-        },
       ),
     );
   }

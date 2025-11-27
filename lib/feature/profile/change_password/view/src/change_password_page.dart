@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:verdora_app/core/theme/spacing.dart';
-import 'package:verdora_app/shared/widgets/src/app_bars/src/title_app_bar.dart';
+import 'package:verdora_app/shared/widgets/src/app_bars/app_bar.dart';
 import 'package:verdora_app/shared/widgets/src/buttons/src/custom_button.dart';
 import 'package:verdora_app/shared/widgets/src/buttons/src/transparent_button.dart';
 import 'package:verdora_app/shared/widgets/src/form_inputs/src/custome_text_field.dart';
@@ -29,7 +29,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MainAppBar(
+      appBar: const PageAppBar(
         title: 'Change Password',
         elevation: 0,
       ),

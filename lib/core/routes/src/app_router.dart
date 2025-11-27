@@ -1,10 +1,12 @@
 import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:verdora_app/core/extensions/src/build_context_etx.dart';
 import 'package:verdora_app/core/routes/routes.dart';
+import 'package:verdora_app/feature/auth/bloc/auth_bloc.dart';
 import 'package:verdora_app/feature/auth/forgot_password/view/src/forgot_password_page.dart';
 import 'package:verdora_app/feature/auth/login/login.dart';
 import 'package:verdora_app/feature/auth/sign_up/sign_up.dart';
@@ -13,7 +15,11 @@ import 'package:verdora_app/feature/home/view/src/home_page.dart';
 import 'package:verdora_app/feature/order/order.dart';
 import 'package:verdora_app/feature/profile/change_password/view/src/change_password_page.dart';
 import 'package:verdora_app/feature/profile/edit_profile/view/src/edit_profile_page.dart';
+import 'package:verdora_app/feature/profile/help_support/view/src/help_support_page.dart';
+import 'package:verdora_app/feature/profile/notification/view/src/notification_page.dart';
+import 'package:verdora_app/feature/profile/privacy/view/src/privacy_page.dart';
 import 'package:verdora_app/feature/profile/view/src/profile_page.dart';
+import 'package:verdora_app/feature/search/view/view.dart';
 import 'package:verdora_app/feature/splash/view/src/splash_page.dart';
 import 'package:verdora_app/feature/welcome/view/src/welcome_page.dart';
 
@@ -42,6 +48,9 @@ enum Pages {
   profile,
   editProfile,
   changePassword,
+  notification,
+  privacy,
+  helpSupport,
   // search
   search,
 }
@@ -100,7 +109,13 @@ class AppRouter {
       GoRoute(
         name: Pages.login.name,
         path: '/login',
-        pageBuilder: (context, state) => LoginPage.page(key: state.pageKey),
+        pageBuilder: (context, state) {
+          final callback = state.uri.queryParameters['callback'];
+          return LoginPage.page(
+            key: state.pageKey,
+            callback: callback,
+          );
+        },
       ),
       // forgot password
       GoRoute(
@@ -113,9 +128,20 @@ class AppRouter {
       GoRoute(
         name: Pages.app.name,
         path: '/app',
-        redirect: (context, state) =>
-            state.fullPath == '/app' ? '/app/home' : null,
+        redirect: (context, state) {
+          if (state.fullPath == '/app') {
+            return '/app/home';
+          }
+          return null;
+        },
         routes: [
+          // search
+          GoRoute(
+            name: Pages.search.name,
+            path: 'search',
+            pageBuilder: (context, state) =>
+                SearchPage.page(key: state.pageKey),
+          ),
           StatefulShellRoute.indexedStack(
             builder: (context, state, navigationShell) {
               navigationBottomBarShell = navigationShell;
@@ -191,6 +217,30 @@ class AppRouter {
                           return ChangePasswordPage.page(key: state.pageKey);
                         },
                       ),
+                      GoRoute(
+                        name: Pages.notification.name,
+                        parentNavigatorKey: rootNavigatorKey,
+                        path: 'notification',
+                        pageBuilder: (context, state) {
+                          return NotificationPage.page(key: state.pageKey);
+                        },
+                      ),
+                      GoRoute(
+                        name: Pages.privacy.name,
+                        parentNavigatorKey: rootNavigatorKey,
+                        path: 'privacy',
+                        pageBuilder: (context, state) {
+                          return PrivacyPage.page(key: state.pageKey);
+                        },
+                      ),
+                      GoRoute(
+                        name: Pages.helpSupport.name,
+                        parentNavigatorKey: rootNavigatorKey,
+                        path: 'help_support',
+                        pageBuilder: (context, state) {
+                          return HelpSupportPage.page(key: state.pageKey);
+                        },
+                      ),
                     ],
                   ),
                 ],
@@ -227,10 +277,16 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
       setState(() => _selectedTab = tab);
       AppRouter.navigationBottomBarShell.goBranch(index);
     }
+    widget.child.goBranch(
+      index,
+      initialLocation: index == widget.child.currentIndex,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final authBloc = context.watch<AuthBloc>();
+    final isLoggedIn = authBloc.state.isLoggedIn;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: widget.child,
