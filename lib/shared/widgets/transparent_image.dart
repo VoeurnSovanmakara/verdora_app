@@ -60,7 +60,7 @@ class TransparentImage extends StatelessWidget {
             ? Image.asset(
                 url!,
                 fit: fit,
-                errorBuilder: (context, _, __) => Image.asset(
+                errorBuilder: (context, _, _) => Image.asset(
                   errorPath ?? 'assets/images/placeholder.png',
                   fit: BoxFit.cover,
                 ),
@@ -71,7 +71,7 @@ class TransparentImage extends StatelessWidget {
                         imageUrl: url ?? '',
                         memCacheHeight: memCacheHeight,
                         progressIndicatorBuilder: progressIndicatorBuilder,
-                        errorWidget: (context, _, __) =>
+                      errorWidget: (context, _, _) =>
                             errorWidget ??
                             AspectRatio(
                               aspectRatio: 1,
@@ -80,7 +80,7 @@ class TransparentImage extends StatelessWidget {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                        placeholder: (_, __) =>
+                      placeholder: (_, _) =>
                             placeHolder ??
                             (placeHolderAspectRatio != null
                                 ? AspectRatio(

@@ -35,6 +35,7 @@ class _OrderListViewState extends State<OrderListView> {
         title: l10n.my_order,
         showBackButton: false,
         isCenterTitle: false,
+        elevation: 0,
       ),
       body: RefreshIndicator.adaptive(
         onRefresh: () async {},

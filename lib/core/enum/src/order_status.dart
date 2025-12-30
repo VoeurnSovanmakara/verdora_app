@@ -6,8 +6,9 @@ enum OrderStatus {
   canceled('CANCELLED'),
   all('');
 
-  final String value;
   const OrderStatus(this.value);
+  final String value;
+  
 
   static OrderStatus fromJson(String? json) {
     switch (json) {

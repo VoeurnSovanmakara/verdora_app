@@ -94,9 +94,9 @@ class CustomModal {
                 CupertinoDialogAction(
                   onPressed: () async {
                     await openAppSettings();
-                    Navigator.of(
-                      context,
-                    ).pop();
+                    if (context.mounted) {
+                      Navigator.of(context).pop();
+                    }
                   },
                   child: Text(
                     l10n.open_setting,

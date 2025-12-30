@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,9 +33,11 @@ class _WelcomeViewState extends State<WelcomeView> {
 
   @override
   void dispose() {
-    getIt<SharedPreferences>().setBool(
+    unawaited(
+      getIt<SharedPreferences>().setBool(
       'isFirstRun',
       false,
+      ),
     );
     super.dispose();
   }

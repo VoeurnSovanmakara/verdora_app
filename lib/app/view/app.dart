@@ -55,14 +55,19 @@ class _AppState extends State<App> {
           builder: (context) {
             final themeState = context.watch<ThemeBloc>().state;
             final languageState = context.watch<LanguageBloc>().state;
+
             return GestureDetector(
               onTap: () {
                 WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
               },
               child: MaterialApp.router(
-                theme: themeState.selectTheme == ThemeColor.darkMode
-                    ? darkTheme
-                    : lightTheme,
+                theme: lightTheme,
+                darkTheme: darkTheme,
+                themeMode: themeState.selectTheme == ThemeColor.systemMode
+                    ? ThemeMode.system
+                    : (themeState.selectTheme == ThemeColor.darkMode
+                          ? ThemeMode.dark
+                          : ThemeMode.light),
                 routerConfig: goRouter,
                 debugShowCheckedModeBanner: false,
                 locale: languageState.selectLanguage,

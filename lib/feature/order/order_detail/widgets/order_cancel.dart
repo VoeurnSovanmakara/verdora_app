@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:verdora_app/core/extensions/src/build_context_etx.dart';
@@ -27,8 +29,8 @@ class _OrderCancelState extends State<OrderCancel> {
       ),
       child: CustomButton(
         onPressed: () {
-          // Todo: enable when backend ready
-          showModalBottomSheet<Widget>(
+          unawaited(
+            showModalBottomSheet<Widget>(
             isScrollControlled: true, // Enables full-screen modal
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -40,6 +42,7 @@ class _OrderCancelState extends State<OrderCancel> {
             //   child: const CancelReasonModal(),
             // ),
             builder: (modalContext) => const CancelReasonModal(),
+            ),
           );
         },
         title: 'Cancel Order',
@@ -161,7 +164,6 @@ class _CancelReasonModalState extends State<CancelReasonModal> {
               ),
               child: CustomButton(
                 title: 'Confirm',
-                // Todo: enable when backend ready
                 // onPressed: _selectedReason.id == 0
                 //     ? null
                 //     : () {

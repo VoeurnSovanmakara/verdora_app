@@ -63,17 +63,21 @@ class _LoginViewState extends State<LoginView> {
       listener: (context, state) async {
         if (state.status == AuthStatus.authenticated) {
           await Future<void>.delayed(const Duration(seconds: 3));
-          context.goNamed(Pages.app.name);
+          if (context.mounted) {
+            context.goNamed(Pages.app.name);
+          }
         }
         if (state.status == AuthStatus.unauthenticated) {
-          await showCupertinoDialog<void>(
-            barrierDismissible: true,
-            context: context,
-            builder: (context) => const AlertDialog.adaptive(
-              title: Text('Fail'),
-              content: Text('Login failed!'),
-            ),
-          );
+          if (context.mounted) {
+            await showCupertinoDialog<void>(
+              barrierDismissible: true,
+              context: context,
+              builder: (context) => const AlertDialog.adaptive(
+                title: Text('Fail'),
+                content: Text('Login failed!'),
+              ),
+            );
+          }
         }
       },
       listenWhen: (previous, current) => previous.status != current.status,

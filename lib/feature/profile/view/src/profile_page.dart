@@ -11,11 +11,9 @@ import 'package:verdora_app/core/enum/src/theme_status.dart';
 import 'package:verdora_app/core/extensions/src/build_context_etx.dart';
 import 'package:verdora_app/core/routes/src/app_router.dart';
 import 'package:verdora_app/core/theme/bloc/theme_bloc.dart';
-import 'package:verdora_app/core/theme/colors.dart';
 import 'package:verdora_app/core/theme/spacing.dart';
 import 'package:verdora_app/feature/auth/bloc/auth_bloc.dart';
 import 'package:verdora_app/l10n/l10n.dart';
-import 'package:verdora_app/shared/widgets/src/app_bars/app_bar.dart';
 import 'package:verdora_app/shared/widgets/src/buttons/buttons.dart';
 import 'package:verdora_app/shared/widgets/src/modals/custom_modals.dart';
 
@@ -50,86 +48,155 @@ class _ProfileViewState extends State<ProfileView> {
     final colors = context.colors;
     final textTheme = context.textTheme;
     final l10n = context.l10n;
-    final isDark = context.colorScheme.brightness == Brightness.dark;
+    // final isDark = context.colorScheme.brightness == Brightness.dark;
     final authBloc = context.watch<AuthBloc>();
     final isLoggedIn = authBloc.state.isLoggedIn;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: const MainAppBar(
-        title: '',
-        showBackButton: false,
-        elevation: 0,
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(Spacing.m),
-            child: Column(
-              children: [
-                // if (isLoggedIn) ...[
-                  const CircleAvatar(
-                  radius: 55,
-                  backgroundImage: NetworkImage(
-                    'https://i.pinimg.com/736x/68/a7/08/68a70868f1b8a3fef0e10316da07335f.jpg',
-                  ),
-                ),
-                const SizedBox(height: Spacing.normal),
-                Text(
-                  'Orewa Shinra',
-                  style: textTheme.displaySmall,
-                ),
-                const SizedBox(height: Spacing.xs),
-                Text(
-                  'shinra131@gmail.com',
-                  style: textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w500,
-                    color: colors.darkShadeGrey60,
-                  ),
-                ),
-                // todo:
-                // ] else ...[
-                //   CircleAvatar(
-                //     backgroundColor: colors.vIconColor,
-                //     radius: 40,
-                //     child: Icon(
-                //       IconsaxPlusLinear.user,
-                //       color: colors.greenPrimary,
-                //       size: 50,
-                //     ),
-                //   ),
-                //   const SizedBox(
-                //     height: 12,
-                //   ),
-                //   Text(
-                //     l10n.you_are_not_signed_in,
-                //     style: textTheme.bodyLarge?.copyWith(),
-                //   ),
-                //   CupertinoButton(
-                //     color: colors.transparent,
-                //     child: Text(
-                //       l10n.sign_in,
-                //       style: textTheme.titleLarge?.copyWith(
-                //         fontWeight: FontWeight.bold,
-                //       ),
-                //     ),
-                //     onPressed: () async {
-                //       await context.pushNamed(
-                //         Pages.login.name,
-                //       );
-                //     },
-                //   ),
-                // ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(Spacing.m),
+              child: Column(
+                children: [
+                  if (isLoggedIn) ...[
+                    const CircleAvatar(
+                      radius: 55,
+                      backgroundImage: NetworkImage(
+                        'https://i.pinimg.com/736x/68/a7/08/68a70868f1b8a3fef0e10316da07335f.jpg',
+                      ),
+                    ),
+                    const SizedBox(height: Spacing.normal),
+                    Text(
+                      'Orewa Shinra',
+                      style: textTheme.displaySmall,
+                    ),
+                    const SizedBox(height: Spacing.xs),
+                    Text(
+                      'shinra131@gmail.com',
+                      style: textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w500,
+                        color: colors.darkShadeGrey60,
+                      ),
+                    ),
+                  ] else ...[
+                    CircleAvatar(
+                      backgroundColor: colors.vIconColor,
+                      radius: 40,
+                      child: Icon(
+                        IconsaxPlusLinear.user,
+                        color: colors.greenPrimary,
+                        size: 50,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Text(
+                      l10n.you_are_not_signed_in,
+                      style: textTheme.bodyLarge?.copyWith(),
+                    ),
+                    CupertinoButton(
+                      color: colors.transparent,
+                      child: Text(
+                        l10n.sign_in,
+                        style: textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onPressed: () async {
+                        await context.pushNamed(
+                          Pages.login.name,
+                        );
+                      },
+                    ),
+                  ],
 
-                // todo:
-                // if (isLoggedIn) ...[
+                  if (isLoggedIn) ...[
+                    const SizedBox(height: Spacing.l4),
+                    Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'My Account',
+                            style: textTheme.displaySmall?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: Spacing.m),
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: colors.vContainerColor,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: kCardShadow,
+                          ),
+                          child: Column(
+                            children: [
+                              ListTile(
+                                leading: Icon(
+                                  IconsaxPlusLinear.edit_2,
+                                  color: colors.neutral0,
+                                ),
+                                onTap: () async {
+                                  await context.pushNamed(
+                                    Pages.editProfile.name,
+                                  );
+                                },
+                                title: Text(
+                                  l10n.edit_profile,
+                                  style: textTheme.bodyLarge?.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                trailing: const Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                ),
+                              ),
+                              Divider(
+                                height: 0,
+                                thickness: 1,
+                                color: colors.lightShadeGrey30,
+                                endIndent: 12,
+                                indent: 12,
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  IconsaxPlusLinear.key,
+                                  color: colors.neutral0,
+                                ),
+                                onTap: () async {
+                                  await context.pushNamed(
+                                    Pages.changePassword.name,
+                                  );
+                                },
+                                title: Text(
+                                  'Change Password',
+                                  style: textTheme.bodyLarge?.copyWith(
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                trailing: const Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                   const SizedBox(height: Spacing.l4),
                   Column(
                     children: [
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'My Account',
+                          l10n.setting,
                           style: textTheme.displaySmall?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -147,14 +214,13 @@ class _ProfileViewState extends State<ProfileView> {
                           children: [
                             ListTile(
                               leading: Icon(
-                                IconsaxPlusLinear.edit_2,
+                                IconsaxPlusLinear.heart,
                                 color: colors.neutral0,
                               ),
-                              onTap: () async {
-                                await context.pushNamed(Pages.editProfile.name);
-                              },
+                              onTap: () =>
+                                  context.pushNamed(Pages.favorite.name),
                               title: Text(
-                              l10n.edit_profile,
+                                l10n.favorite,
                                 style: textTheme.bodyLarge?.copyWith(
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -172,16 +238,316 @@ class _ProfileViewState extends State<ProfileView> {
                             ),
                             ListTile(
                               leading: Icon(
-                                IconsaxPlusLinear.key,
+                                IconsaxPlusLinear.global,
                                 color: colors.neutral0,
                               ),
-                              onTap: () async {
-                                await context.pushNamed(
-                                  Pages.changePassword.name,
+                              onTap: () {
+                                final languageState = context
+                                    .read<LanguageBloc>()
+                                    .state;
+                                final l10n = context.l10n;
+                                unawaited(
+                                  CustomModal.showRoundedModal(
+                                    AppRouter.rootNavigatorKey.currentContext!,
+                                    (modalContext) => BlocProvider.value(
+                                      value: context.read<LanguageBloc>(),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(16),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  l10n.select_language,
+                                                  style: textTheme.titleLarge,
+                                                ),
+                                                IconButton(
+                                                  onPressed: () {
+                                                    modalContext.pop();
+                                                  },
+                                                  icon: const Icon(Icons.close),
+                                                ),
+                                              ],
+                                            ),
+                                            ListTile(
+                                              leading: Text(
+                                                '🇰🇭',
+                                                style: textTheme.displayLarge,
+                                              ),
+                                              onTap: () {
+                                                _changeLanguage(
+                                                  const Locale('km'),
+                                                );
+                                              },
+                                              title: const Text('ភាសាខ្មែរ'),
+                                              trailing:
+                                                  languageState
+                                                          .selectLanguage ==
+                                                      const Locale('km')
+                                                  ? Icon(
+                                                      Icons.check_circle,
+                                                      color: colors.primary,
+                                                    )
+                                                  : null,
+                                            ),
+                                            ListTile(
+                                              leading: Text(
+                                                '🇺🇸',
+                                                style: textTheme.displayLarge,
+                                              ),
+                                              onTap: () {
+                                                _changeLanguage(
+                                                  const Locale('en'),
+                                                );
+                                              },
+                                              title: const Text('English'),
+                                              trailing:
+                                                  languageState
+                                                          .selectLanguage ==
+                                                      const Locale('en')
+                                                  ? Icon(
+                                                      Icons.check_circle,
+                                                      color: colors.primary,
+                                                    )
+                                                  : null,
+                                            ),
+                                            const SizedBox(
+                                              height: 20,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 );
                               },
                               title: Text(
-                                'Change Password',
+                                l10n.language,
+                                style: textTheme.bodyLarge?.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              trailing: const Icon(
+                                Icons.arrow_forward_ios_rounded,
+                              ),
+                            ),
+                            Divider(
+                              height: 0,
+                              thickness: 1,
+                              color: colors.lightShadeGrey30,
+                              endIndent: 12,
+                              indent: 12,
+                            ),
+                            BlocProvider.value(
+                              value: context.read<ThemeBloc>(),
+                              child: ListTile(
+                                leading: Icon(
+                                  Icons.color_lens_outlined,
+                                  color: colors.neutral0,
+                                ),
+                                title: Text(
+                                  'Themes',
+                                  style: textTheme.bodyLarge,
+                                ),
+                                onTap: () {
+                                  unawaited(
+                                    showModalBottomSheet<void>(
+                                      context: AppRouter
+                                          .rootNavigatorKey
+                                          .currentContext!,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.vertical(
+                                          top: Radius.circular(12),
+                                        ),
+                                      ),
+                                      builder: (context) {
+                                        return BlocBuilder<
+                                          ThemeBloc,
+                                          ThemeState
+                                        >(
+                                          builder: (context, state) {
+                                            return RadioGroup<ThemeColor>(
+                                              groupValue: state.selectTheme,
+                                              onChanged: (value) {
+                                                if (value != null) {
+                                                  context.read<ThemeBloc>().add(
+                                                    ThemeAppChange(
+                                                      theme: value,
+                                                    ),
+                                                  );
+                                                }
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                          left: 16,
+                                                          top: 16,
+                                                          bottom: 8,
+                                                          right: 8,
+                                                        ),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          'Select Themes',
+                                                          style: textTheme
+                                                              .titleLarge,
+                                                        ),
+                                                        IconButton(
+                                                          onPressed: () {
+                                                            context.pop();
+                                                          },
+                                                          icon: const Icon(
+                                                            Icons.close,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  RadioListTile<ThemeColor>(
+                                                    activeColor:
+                                                        colors.vPrimaryColor,
+                                                    value: ThemeColor.lightMode,
+                                                    secondary: Icon(
+                                                      IconsaxPlusLinear.sun_1,
+                                                      color: colors.neutral0,
+                                                    ),
+                                                    title: Text(
+                                                      l10n.light_mode,
+                                                      style: textTheme.bodyLarge
+                                                          ?.copyWith(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                  RadioListTile<ThemeColor>(
+                                                    activeColor:
+                                                        colors.vPrimaryColor,
+                                                    value: ThemeColor.darkMode,
+                                                    secondary: Icon(
+                                                      IconsaxPlusLinear.moon,
+                                                      color: colors.neutral0,
+                                                    ),
+                                                    title: Text(
+                                                      l10n.dark_mode,
+                                                      style: textTheme.bodyLarge
+                                                          ?.copyWith(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                  RadioListTile<ThemeColor>(
+                                                    activeColor:
+                                                        colors.vPrimaryColor,
+                                                        
+                                                    value:
+                                                        ThemeColor.systemMode,
+                                                    secondary: Icon(
+                                                      IconsaxPlusLinear
+                                                          .setting_2,
+                                                      color: colors.neutral0,
+                                                    ),
+                                                    title: Text(
+                                                      'System Mode',
+                                                      style: textTheme.bodyLarge
+                                                          ?.copyWith(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 30,
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
+                                trailing: const Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                ),
+                              ),
+                            ),
+                            Divider(
+                              height: 0,
+                              thickness: 1,
+                              color: colors.lightShadeGrey30,
+                              endIndent: 12,
+                              indent: 12,
+                            ),
+                            ListTile(
+                              leading: Icon(
+                                IconsaxPlusLinear.info_circle,
+                                color: colors.neutral0,
+                              ),
+                              onTap: () {},
+                              title: Text(
+                                l10n.about_us,
+                                style: textTheme.bodyLarge?.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              trailing: const Icon(
+                                Icons.arrow_forward_ios_rounded,
+                              ),
+                            ),
+                            Divider(
+                              height: 0,
+                              thickness: 1,
+                              color: colors.lightShadeGrey30,
+                              endIndent: 12,
+                              indent: 12,
+                            ),
+                            ListTile(
+                              leading: Icon(
+                                IconsaxPlusLinear.shield_security,
+                                color: colors.neutral0,
+                              ),
+                              onTap: () =>
+                                  context.pushNamed(Pages.privacy.name),
+                              title: Text(
+                                l10n.privacy_policy,
+                                style: textTheme.bodyLarge?.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              trailing: const Icon(
+                                Icons.arrow_forward_ios_rounded,
+                              ),
+                            ),
+                            Divider(
+                              height: 0,
+                              thickness: 1,
+                              color: colors.lightShadeGrey30,
+                              endIndent: 12,
+                              indent: 12,
+                            ),
+                            ListTile(
+                              leading: Icon(
+                                Icons.support_agent_outlined,
+                                color: colors.neutral0,
+                              ),
+                              onTap: () =>
+                                  context.pushNamed(Pages.helpSupport.name),
+                              title: Text(
+                                l10n.help_support,
                                 style: textTheme.bodyLarge?.copyWith(
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -195,323 +561,67 @@ class _ProfileViewState extends State<ProfileView> {
                       ),
                     ],
                   ),
-                // ],
-                const SizedBox(height: Spacing.l4),
-                Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        l10n.setting,
-                        style: textTheme.displaySmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                  const SizedBox(height: Spacing.l4),
+                  if (isLoggedIn)
+                    CustomButton(
+                      backgroundColor: Colors.red.withValues(alpha: 0.2),
+                      title: 'Log Out',
+                      textStyle: textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.red,
                       ),
-                    ),
-                    const SizedBox(height: Spacing.m),
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: colors.vContainerColor,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: kCardShadow,
-                      ),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            leading: Icon(
-                              IconsaxPlusLinear.heart,
-                              color: colors.neutral0,
-                            ),
-                            onTap: () =>
-                                context.pushNamed(Pages.favorite.name),
-                            title: Text(
-                              l10n.favorite,
-                              style: textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            trailing: const Icon(
-                              Icons.arrow_forward_ios_rounded,
-                            ),
-                          ),
-                          Divider(
-                            height: 0,
-                            thickness: 1,
-                            color: colors.lightShadeGrey30,
-                            endIndent: 12,
-                            indent: 12,
-                          ),
-                          ListTile(
-                            leading: Icon(
-                              IconsaxPlusLinear.global,
-                              color: colors.neutral0,
-                            ),
-                            onTap: () {
-                              final languageState = context
-                                  .read<LanguageBloc>()
-                                  .state;
-                              final l10n = context.l10n;
-                              unawaited(
-                                CustomModal.showRoundedModal(
-                                  AppRouter.rootNavigatorKey.currentContext!,
-                                  (modalContext) => BlocProvider.value(
-                                    value: context.read<LanguageBloc>(),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                l10n.select_language,
-                                                style: textTheme.titleLarge,
-                                              ),
-                                              IconButton(
-                                                onPressed: () {
-                                                  modalContext.pop();
-                                                },
-                                                icon: const Icon(Icons.close),
-                                              ),
-                                            ],
-                                          ),
-                                          ListTile(
-                                            leading: Text(
-                                              '🇰🇭',
-                                              style: textTheme.displayLarge,
-                                            ),
-                                            onTap: () {
-                                              _changeLanguage(
-                                                const Locale('km'),
-                                              );
-                                            },
-                                            title: const Text('ភាសាខ្មែរ'),
-                                            trailing:
-                                                languageState.selectLanguage ==
-                                                    const Locale('km')
-                                                ? Icon(
-                                                    Icons.check_circle,
-                                                    color: colors.primary,
-                                                  )
-                                                : null,
-                                          ),
-                                          ListTile(
-                                            leading: Text(
-                                              '🇺🇸',
-                                              style: textTheme.displayLarge,
-                                            ),
-                                            onTap: () {
-                                              _changeLanguage(
-                                                const Locale('en'),
-                                              );
-                                            },
-                                            title: const Text('English'),
-                                            trailing:
-                                                languageState.selectLanguage ==
-                                                    const Locale('en')
-                                                ? Icon(
-                                                    Icons.check_circle,
-                                                    color: colors.primary,
-                                                  )
-                                                : null,
-                                          ),
-                                          const SizedBox(
-                                            height: 20,
-                                          ),
-                                        ],
-                                      ),
+                      onPressed: () async {
+                        await CustomModal.showRoundedModal(
+                          AppRouter.rootNavigatorKey.currentContext!,
+                          (modalContext) => Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Are you sure you want to sign out?',
+                                      style: textTheme.titleLarge,
                                     ),
-                                  ),
+                                    IconButton(
+                                      onPressed: () {
+                                        modalContext.pop();
+                                      },
+                                      icon: const Icon(Icons.close),
+                                    ),
+                                  ],
                                 ),
-                              );
-                            },
-                            title: Text(
-                              l10n.language,
-                              style: textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            trailing: const Icon(
-                              Icons.arrow_forward_ios_rounded,
-                            ),
-                          ),
-                          Divider(
-                            height: 0,
-                            thickness: 1,
-                            color: colors.lightShadeGrey30,
-                            endIndent: 12,
-                            indent: 12,
-                          ),
-                          BlocBuilder<ThemeBloc, ThemeState>(
-                            builder: (context, state) {
-                              return ListTile(
-                                leading: Icon(
-                                  isDark
-                                      ? IconsaxPlusLinear.moon
-                                      : IconsaxPlusLinear.sun_1,
-                                  color: colors.neutral0,
-                                ),
-                                title: Text(
-                                  isDark ? l10n.dark_mode : l10n.light_mode,
-                                  style: textTheme.bodyLarge?.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                trailing: CupertinoSwitch(
-                                  value: isDark,
-                                  activeTrackColor: colors.primary,
-                                  thumbColor: AppColors.white,
-                                  onChanged: (value) {
-                                    final newTheme = value
-                                        ? ThemeColor.darkMode
-                                        : ThemeColor.lightMode;
-                                    context.read<ThemeBloc>().add(
-                                      ThemeAppChange(theme: newTheme),
-                                    );
+                                const SizedBox(height: 10),
+                                CustomButton(
+                                  title: 'Log Out',
+                                  onPressed: () async {
+                                    modalContext.pop();
                                   },
                                 ),
-                              );
-                            },
-                          ),
-                          Divider(
-                            height: 0,
-                            thickness: 1,
-                            color: colors.lightShadeGrey30,
-                            endIndent: 12,
-                            indent: 12,
-                          ),
-                          ListTile(
-                            leading: Icon(
-                              IconsaxPlusLinear.info_circle,
-                              color: colors.neutral0,
-                            ),
-                            onTap: () {},
-                            title: Text(
-                              l10n.about_us,
-                              style: textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            trailing: const Icon(
-                              Icons.arrow_forward_ios_rounded,
-                            ),
-                          ),
-                          Divider(
-                            height: 0,
-                            thickness: 1,
-                            color: colors.lightShadeGrey30,
-                            endIndent: 12,
-                            indent: 12,
-                          ),
-                          ListTile(
-                            leading: Icon(
-                              IconsaxPlusLinear.shield_security,
-                              color: colors.neutral0,
-                            ),
-                            onTap: () => context.pushNamed(Pages.privacy.name),
-                            title: Text(
-                              l10n.privacy_policy,
-                              style: textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            trailing: const Icon(
-                              Icons.arrow_forward_ios_rounded,
-                            ),
-                          ),
-                          Divider(
-                            height: 0,
-                            thickness: 1,
-                            color: colors.lightShadeGrey30,
-                            endIndent: 12,
-                            indent: 12,
-                          ),
-                          ListTile(
-                            leading: Icon(
-                              Icons.support_agent_outlined,
-                              color: colors.neutral0,
-                            ),
-                            onTap: () =>
-                                context.pushNamed(Pages.helpSupport.name),
-                            title: Text(
-                              l10n.help_support,
-                              style: textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            trailing: const Icon(
-                              Icons.arrow_forward_ios_rounded,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: Spacing.l4),
-                // todo:
-                // if (isLoggedIn)
-                  CustomButton(
-                    backgroundColor: Colors.red.withValues(alpha: 0.2),
-                    title: 'Log Out',
-                    textStyle: textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: Colors.red,
-                    ),
-                    onPressed: () async {
-                      await CustomModal.showRoundedModal(
-                        AppRouter.rootNavigatorKey.currentContext!,
-                        (modalContext) => Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Are you sure you want to sign out?',
-                                    style: textTheme.titleLarge,
+                                const SizedBox(height: 10),
+                                CustomOutlineButton(
+                                  textStyle: textTheme.titleLarge?.copyWith(
+                                    color: colors.vErrorColor,
                                   ),
-                                  IconButton(
-                                    onPressed: () {
-                                      modalContext.pop();
-                                    },
-                                    icon: const Icon(Icons.close),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 10),
-                              CustomButton(
-                                title: 'Log Out',
-                                onPressed: () async {
-                                  modalContext.pop();
-                                },
-                              ),
-                              const SizedBox(height: 10),
-                              CustomOutlineButton(
-                              textStyle: textTheme.titleLarge?.copyWith(
-                                color: colors.vErrorColor,
-                              ),
-                              color: colors.vErrorColor,
-                              title: l10n.cancel,
-                                onPressed: () => modalContext.pop(),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                            ],
+                                  color: colors.vErrorColor,
+                                  title: l10n.cancel,
+                                  onPressed: () => modalContext.pop(),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                  ),
-                const SizedBox(height: 150),
-              ],
+                        );
+                      },
+                    ),
+                  const SizedBox(height: 150),
+                ],
+              ),
             ),
           ),
         ),

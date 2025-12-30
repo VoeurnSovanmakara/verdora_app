@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 /// Our custom fork of https://pub.dev/packages/modal_progress_hud adding a fading effect
@@ -20,6 +22,7 @@ class LoadingOverlay extends StatefulWidget {
   const LoadingOverlay({
     required this.isLoading,
     required this.child,
+    super.key,
     this.opacity = 0.5,
     this.progressIndicator = const CircularProgressIndicator(),
     this.color,
@@ -31,7 +34,6 @@ class LoadingOverlay extends StatefulWidget {
   final Widget child;
 
   @override
-  // ignore: library_private_types_in_public_api
   _LoadingOverlayState createState() => _LoadingOverlayState();
 }
 
@@ -47,16 +49,17 @@ class _LoadingOverlayState extends State<LoadingOverlay>
     super.initState();
     _overlayVisible = false;
     _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+        AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
     _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
     _animation.addStatusListener((status) {
-      // ignore: unnecessary_statements
       status == AnimationStatus.forward
           ? setState(() {
               _overlayVisible = true;
             })
           : null;
-      // ignore: unnecessary_statements
       status == AnimationStatus.dismissed
           ? setState(() {
               _overlayVisible = false;
@@ -65,7 +68,7 @@ class _LoadingOverlayState extends State<LoadingOverlay>
           : null;
     });
     if (widget.isLoading) {
-      _controller.forward();
+      unawaited(_controller.forward());
     }
   }
 
@@ -73,11 +76,11 @@ class _LoadingOverlayState extends State<LoadingOverlay>
   void didUpdateWidget(LoadingOverlay oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (!oldWidget.isLoading && widget.isLoading) {
-      _controller.forward();
+      unawaited(_controller.forward());
     }
 
     if (oldWidget.isLoading && !widget.isLoading) {
-      _controller.reverse();
+      unawaited(_controller.reverse());
     }
   }
 

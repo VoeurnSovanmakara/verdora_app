@@ -33,6 +33,7 @@ class _NotificationViewState extends State<NotificationView> {
         title: l10n.notifications,
         isCenterTitle: false,
         showBackButton: false,
+        elevation: 0,
       ),
       body: ListView.builder(
         itemCount: 10,

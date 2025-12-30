@@ -44,6 +44,7 @@ class _CartViewState extends State<CartView> {
         title: l10n.my_cart,
         showBackButton: false,
         isCenterTitle: false,
+        elevation: 0,
         actions: [
           CupertinoButton(
             child: Text(

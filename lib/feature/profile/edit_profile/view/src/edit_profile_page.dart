@@ -4,11 +4,11 @@ import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:verdora_app/core/extensions/src/build_context_etx.dart';
 import 'package:verdora_app/core/theme/spacing.dart';
 import 'package:verdora_app/l10n/l10n.dart';
+import 'package:verdora_app/shared/shared.dart';
 import 'package:verdora_app/shared/widgets/custom_image.dart';
 import 'package:verdora_app/shared/widgets/src/app_bars/app_bar.dart';
 import 'package:verdora_app/shared/widgets/src/form_inputs/src/custome_text_field.dart';
 import 'package:verdora_app/shared/widgets/src/modals/custom_modals.dart';
-import 'package:verdora_app/shared/widgets/widget.dart';
 
 class EditProfilePage extends StatelessWidget {
   const EditProfilePage({super.key});
