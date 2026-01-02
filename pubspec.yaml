@@ -35,7 +35,7 @@ scripts:
     watch: dart run build_runner watch
 
 dependencies:
-  bloc: ^9.0.1
+  bloc: ^9.2.0
   bloc_concurrency: ^0.3.0
   cached_network_image: ^3.4.1
   crystal_navigation_bar: ^1.0.4
